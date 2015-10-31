@@ -1,0 +1,25 @@
+{
+  "name": "hapijs-starter",
+  "version": "1.0.0",
+  "description": "Skeleton project with HapiJS",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rkovacevic/hapijs-starter.git"
+  },
+  "keywords": [
+    "hapijs"
+  ],
+  "author": "Robert Kovacevic",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rkovacevic/hapijs-starter/issues"
+  },
+  "homepage": "https://github.com/rkovacevic/hapijs-starter#readme",
+  "dependencies": {
+    "hapi": "^11.0.3"
+  }
+}
