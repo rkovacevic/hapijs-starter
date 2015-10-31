@@ -1,14 +1,32 @@
 var Path = require('path');
 var Hapi = require('hapi');
+var Inert = require('inert');
+var Good = require('good');
 
 var server = new Hapi.Server();
 
 server.connection({ 
-    port: process.env.PORT,
-    host: process.env.IP
+    port: process.env.PORT || 3000,
+    host: process.env.IP || '0.0.0.0'
 });
 
-server.register(require('inert'), err => {
+var plugins = [
+    Inert, 
+    {
+        register: Good,
+        options: {
+            reporters: [{
+                reporter: require('good-console'),
+                events: {
+                    response: '*',
+                    log: '*'
+                }
+            }]
+        }
+    }
+];
+
+server.register(plugins, err => {
     if (err) throw err;
 
     // Serving static files from 'public' directory
