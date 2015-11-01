@@ -30,9 +30,9 @@ server.register(plugins, err => {
     if (err) throw err;
     
     server.route({
-    method: 'GET',
-    path: '/api/users/me',
-    handler: function (request, reply) {
+        method: 'GET',
+        path: '/api/users/me',
+        handler: function (request, reply) {
             reply({username: 'Joe User'});
         }
     });
@@ -46,9 +46,9 @@ server.register(plugins, err => {
     });
     
     server.route({
-    method: 'GET',
-    path: '/build/{param*}',
-    handler: {
+        method: 'GET',
+        path: '/build/{param*}',
+        handler: {
         directory: {
             path: Path.join(__dirname, 'build'),
             index: true
