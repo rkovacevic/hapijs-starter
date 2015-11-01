@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import 'bootstrap-webpack'
 import { Panel, Button } from 'react-bootstrap';
-import './App.css'
 
-export default class App extends Component {
+export default class About extends Component {
   render() {
     return (
+        <div>
         <Panel id="main-panel">
-            <h1>Hello, world.</h1>
+            <h1>About.</h1>
             <Button bsStyle="primary" bsSize="large">OK, excellent</Button>
         </Panel>
+        </div>
     );
   }
 }

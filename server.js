@@ -28,10 +28,18 @@ var plugins = [
 
 server.register(plugins, err => {
     if (err) throw err;
-
+    
+    server.route({
+    method: 'GET',
+    path: '/api/users/me',
+    handler: function (request, reply) {
+            reply({username: 'Joe User'});
+        }
+    });
+    
     server.route({
         method: 'GET',
-        path: '/',
+        path: '/{param*}',
         handler: function (request, reply) {
             reply.file(Path.join(__dirname, 'frontend', 'index.html'));
         }
@@ -39,7 +47,7 @@ server.register(plugins, err => {
     
     server.route({
     method: 'GET',
-    path: '/{param*}',
+    path: '/build/{param*}',
     handler: {
         directory: {
             path: Path.join(__dirname, 'build'),
