@@ -24,7 +24,7 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                loaders: ['react-hot', 'babel'],
+                loaders: ['react-hot', 'babel?presets[]=es2015'],
                 include: path.join(__dirname, 'frontend')
             },
             {
