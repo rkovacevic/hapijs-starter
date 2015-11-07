@@ -3,7 +3,8 @@
   "ignore": [
     ".git",
     "node_modules/**/node_modules",
-    "frontend/*"
+    "frontend/",
+    "build/"
   ],
   "ext": "js json jsx"
 }

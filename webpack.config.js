@@ -3,19 +3,12 @@ var webpack = require('webpack');
 
 module.exports = {
     devtool: 'eval',
-    entry: [
-    'webpack-dev-server/client?https://' + process.env.IP + ':' + process.env.PORT,
-    'webpack/hot/only-dev-server',
-    './frontend/index'
-  ],
+    entry: [ './frontend/index' ],
     output: {
         path: path.join(__dirname, 'build'),
         filename: 'bundle.js',
         publicPath: '/build/'
     },
-    plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
     module: {
         loaders: [
             {
@@ -24,12 +17,12 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                loaders: ['react-hot', 'babel?presets[]=es2015'],
+                loaders: ['babel'],
                 include: path.join(__dirname, 'frontend')
             },
             {
-                test: /\.css$/, // Only .css files
-                loader: 'style!css' // Run both loaders
+                test: /\.css$/,
+                loader: 'style!css'
             },
             {
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
