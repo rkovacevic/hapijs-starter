@@ -9,6 +9,11 @@ module.exports = {
         filename: 'bundle.js',
         publicPath: '/build/'
     },
+    plugins: [
+          new webpack.ProvidePlugin({
+            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+          })
+        ],
     module: {
         loaders: [
             {

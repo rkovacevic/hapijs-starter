@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import 'bootstrap-webpack'
 import { Input, ButtonInput } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import restful, { fetchBackend } from 'restful.js';
 
+const api = restful('/api', fetchBackend(fetch));
 
 export default class Register extends Component {
     
@@ -41,10 +43,19 @@ export default class Register extends Component {
 
         this.onSubmit = function(e) {
             e.preventDefault()
-            console.log('on sub')
-            that.setState({ validationErrors: {
-                username: "bla"
-            }});
+            api.all('users').post({
+                username: that.state.username.value
+            })
+            .then(result => {
+                console.log(result)
+            })
+            .catch(error => {
+                console.log('catch')
+                console.dir(error.response.data.validationErrors)
+            })
+            //that.setState({ validationErrors: {
+            //    username: "bla"
+            //}});
         }
     }
 

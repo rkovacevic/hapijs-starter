@@ -2,7 +2,7 @@ var Path = require('path')
 var Hapi = require('hapi')
 var Inert = require('inert')
 var Good = require('good')
-var db = require('./models')
+var models = require('./models')
 var routes = require('./routes')
 
 var server = new Hapi.Server()
@@ -33,7 +33,7 @@ server.register(plugins, err => {
     
     routes.register(server)
 
-    db.sequelize.sync().then(() => {
+    models.sequelize.sync().then(() => {
         server.start( err => {
             if (err) throw err
             console.log('Server running at:', server.info.uri)

@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/rkovacevic/hapijs-starter#readme",
   "dependencies": {
+    "boom": "^3.0.0",
     "bootstrap": "^3.3.5",
     "bootstrap-webpack": "0.0.5",
     "css-loader": "^0.21.0",
@@ -57,10 +58,12 @@
     "react-dom": "^0.14.0",
     "react-router": "^1.0.0-rc3",
     "react-router-bootstrap": "^0.19.3",
+    "restful.js": "^0.9.3",
     "sequelize": "^3.13.0",
     "sqlite3": "^3.1.1",
     "style-loader": "^0.13.0",
-    "url-loader": "^0.5.6"
+    "url-loader": "^0.5.6",
+    "whatwg-fetch": "^0.10.1"
   },
   "devDependencies": {
     "babel-core": "^6.0.20",
