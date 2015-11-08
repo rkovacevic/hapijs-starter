@@ -3,6 +3,7 @@ var Hapi = require('hapi')
 var Inert = require('inert')
 var Good = require('good')
 var db = require('./models')
+var routes = require('./routes')
 
 var server = new Hapi.Server()
 
@@ -30,32 +31,7 @@ var plugins = [
 server.register(plugins, err => {
     if (err) throw err
     
-    server.route({
-        method: 'GET',
-        path: '/api/users/me',
-        handler: function (request, reply) {
-            reply({username: 'Joe User'})
-        }
-    })
-    
-    server.route({
-        method: 'GET',
-        path: '/{param*}',
-        handler: function (request, reply) {
-            reply.file(Path.join(__dirname, 'frontend', 'index.html'))
-        }
-    })
-    
-    server.route({
-        method: 'GET',
-        path: '/build/{param*}',
-        handler: {
-        directory: {
-            path: Path.join(__dirname, 'build'),
-            index: true
-            }
-        }
-    })
+    routes.register(server)
 
     db.sequelize.sync().then(() => {
         server.start( err => {
