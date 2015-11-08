@@ -3,10 +3,7 @@ import 'bootstrap-webpack'
 import { Input, ButtonInput } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-// This is a demonstration of a form with client and server
-// side validation. In general, you would be much better off
-// to use a library like 'newforms', but here we do it 
-// manually, as a learning excersize. 
+
 export default class Register extends Component {
     
     constructor() {
@@ -15,21 +12,31 @@ export default class Register extends Component {
         let that = this
 
         this.state = {
-            username: '',
-            password: '',
-            repeatPassword: '',
-            validationErrors: {},
-            _dirty: false
+            username: {
+                value: '',
+                dirty: false,
+                errorMessage: undefined
+            },
+            password: {
+                value: '',
+                dirty: false,
+                errorMessage: undefined
+            },
+            repeatPassword: {
+                value: '',
+                dirty: false,
+                errorMessage: undefined
+            }
         }
 
-        this.updateState = function() {
-            that.setState({
-                username: that.refs.username.getValue(),
-                password: that.refs.password.getValue(),
-                repeatPassword: that.refs.repeatPassword.getValue(),
-                validationErrors: {},
-                _dirty: true
-            })
+        this.updateState = function(e) {
+            let stateUpdate = {}
+            stateUpdate[e.target.name] = {
+                value: e.target.value,
+                dirty: true,
+                errorMessage: undefined
+            }
+            that.setState(stateUpdate)
         }
 
         this.onSubmit = function(e) {
@@ -42,22 +49,46 @@ export default class Register extends Component {
     }
 
     render() {
-        let validationErrors = this.state.validationErrors;
         let styles = {}
-        if (this.state._dirty) {
-            if (this.state.username.length === 0) validationErrors.username = 'You need to enter a username'
-            if (this.state.password.length === 0) validationErrors.password = 'You need to enter a password'
-            if (this.state.password !== this.state.repeatPassword) validationErrors.repeatPassword = 'Passwords need to match'
-            for (let err in validationErrors) styles[err] = 'error'
+        let helps = {}
+
+        if (this.state.username.dirty && this.state.username.value.length < 5) {
+            helps.username = 'You need to enter a username, at least 5 characters long'
+            styles.username = 'error';
+        }
+        
+        if (this.state.password.dirty && this.state.password.value.length < 5) {
+            helps.password = 'You need to enter a password, at least 5 characters long'
+            styles.password = 'error'
+        }
+        
+        if (this.state.repeatPassword.dirty && this.state.repeatPassword.value !== this.state.password.value) {
+            helps.repeatPassword = 'Passwords need to match'
+            styles.repeatPassword = 'error'
+        }
+
+        if (this.state.username.errorMessage !== undefined) {
+            helps.username = this.state.username.errorMessage
+            styles.username = 'error'
+        }
+
+        if (this.state.password.errorMessage !== undefined) {
+            helps.password = this.state.password.errorMessage
+            styles.password = 'error'
+        }
+
+        if (this.state.repeatPassword.errorMessage !== undefined) {
+            helps.repeatPassword = this.state.repeatPassword.errorMessage
+            styles.repeatPassword = 'error'
         }
 
         return (
             <div>
                 <h1>Register a new user</h1>
                 <form onSubmit={this.onSubmit}>
-                    <Input ref="username" type="text" label="Username" bsStyle={styles.username} help={validationErrors.username} placeholder="Enter username" onBlur={this.updateState} />
-                    <Input ref="password" type="password" label="Password" placeholder="Enter password" onBlur={this.updateState} />
-                    <Input ref="repeatPassword" type="password" label="Reapeat password" placeholder="Enter the same password again" onBlur={this.updateState} />
+                    <Input name="username" type="text" label="Username" bsStyle={styles.username} help={helps.username} placeholder="Enter username" onBlur={this.updateState} />
+                    <Input name="password" type="password" label="Password" placeholder="Enter password" bsStyle={styles.password} help={helps.password} onBlur={this.updateState} />
+                    <Input name="repeatPassword" type="password" label="Reapeat password" placeholder="Enter the same password again" bsStyle={styles.repeatPassword} help={helps.repeatPassword} onBlur={this.updateState} />
                     <ButtonInput type="submit" value="Submit" bsSize="large" bsStyle="primary"/>
                 </form>
             </div>
