@@ -1,3 +1,5 @@
+.DS_Store
+
 # Logs
 logs
 *.log
@@ -27,3 +29,4 @@ build/Release
 node_modules
 
 build
+db.sqlite
