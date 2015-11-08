@@ -1,14 +1,14 @@
-var Path = require('path');
-var Hapi = require('hapi');
-var Inert = require('inert');
-var Good = require('good');
+var Path = require('path')
+var Hapi = require('hapi')
+var Inert = require('inert')
+var Good = require('good')
 
-var server = new Hapi.Server();
+var server = new Hapi.Server()
 
 server.connection({ 
     port: process.env.PORT || 3000,
     host: process.env.IP || '0.0.0.0'
-});
+})
 
 var plugins = [
     Inert, 
@@ -24,26 +24,26 @@ var plugins = [
             }]
         }
     }
-];
+]
 
 server.register(plugins, err => {
-    if (err) throw err;
+    if (err) throw err
     
     server.route({
         method: 'GET',
         path: '/api/users/me',
         handler: function (request, reply) {
-            reply({username: 'Joe User'});
+            reply({username: 'Joe User'})
         }
-    });
+    })
     
     server.route({
         method: 'GET',
         path: '/{param*}',
         handler: function (request, reply) {
-            reply.file(Path.join(__dirname, 'frontend', 'index.html'));
+            reply.file(Path.join(__dirname, 'frontend', 'index.html'))
         }
-    });
+    })
     
     server.route({
         method: 'GET',
@@ -54,10 +54,10 @@ server.register(plugins, err => {
             index: true
             }
         }
-    });
+    })
 
     server.start( err => {
-        if (err) throw err;
-        console.log('Server running at:', server.info.uri);
-    });
-});
+        if (err) throw err
+        console.log('Server running at:', server.info.uri)
+    })
+})

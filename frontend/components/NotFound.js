@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import 'bootstrap-webpack'
-import { Well, Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Well, Button } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 
 export default class NotFound extends Component {
   render() {
@@ -14,6 +14,6 @@ export default class NotFound extends Component {
                 </LinkContainer>
             </Well>
         </div>
-    );
+    )
   }
 }

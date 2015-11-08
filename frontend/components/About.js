@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import 'bootstrap-webpack';
-import { Panel, Button } from 'react-bootstrap';
+import React, { Component } from 'react'
+import 'bootstrap-webpack'
+import { Panel, Button } from 'react-bootstrap'
 
 export default class About extends Component {
 
@@ -10,6 +10,6 @@ export default class About extends Component {
                 <h1>About.</h1>
                 <Button bsStyle="primary" bsSize="large">OK, excellent</Button>
             </Panel>
-        );
+        )
     }
 }

@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import 'bootstrap-webpack'
-import { Navbar, NavBrand, NavItem, NavDropdown, Nav, MenuItem, Panel, Button } from 'react-bootstrap';
-import { Link } from 'react-router';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Navbar, NavBrand, NavItem, NavDropdown, Nav, MenuItem, Panel, Button } from 'react-bootstrap'
+import { Link } from 'react-router'
+import { LinkContainer } from 'react-router-bootstrap'
 import './App.css'
 
 export default class App extends Component {
@@ -25,6 +25,6 @@ export default class App extends Component {
                     {this.props.children}
                 </div>
             </div>
-        );
+        )
     }
 }
