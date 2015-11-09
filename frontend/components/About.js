@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import 'bootstrap-webpack'
 import { Panel, Button } from 'react-bootstrap'
 
-export default class About extends Component {
-
+export default React.createClass({
     render() {
         return (
             <Panel id="main-panel">
@@ -12,4 +11,4 @@ export default class About extends Component {
             </Panel>
         )
     }
-}
+})

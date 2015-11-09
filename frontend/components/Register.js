@@ -6,7 +6,7 @@ import restful, { fetchBackend } from 'restful.js';
 
 const api = restful('/api', fetchBackend(fetch));
 
-export default class Register extends Component {
+class Register extends Component {
     
     constructor() {
         super()
@@ -44,22 +44,22 @@ export default class Register extends Component {
         this.onSubmit = function(e) {
             e.preventDefault()
             api.all('users').post({
-                username: that.state.username.value
+                username: that.state.username.value,
+                password: that.state.password.value
             })
             .then(result => {
+                that.context.history.pushState(undefined, '/')
                 console.log(result)
             })
             .catch(error => {
                 console.log('catch')
                 console.dir(error.response.data.validationErrors)
             })
-            //that.setState({ validationErrors: {
-            //    username: "bla"
-            //}});
         }
     }
 
     render() {
+        console.dir(this.context.history)
         let styles = {}
         let helps = {}
 
@@ -106,3 +106,9 @@ export default class Register extends Component {
         )
     }
 }
+
+Register.contextTypes = {
+    history: React.PropTypes.object.isRequired
+}
+
+export default Register
