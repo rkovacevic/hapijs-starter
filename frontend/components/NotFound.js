@@ -3,7 +3,7 @@ import 'bootstrap-webpack'
 import { Well, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-export default class NotFound extends Component {
+export default React.createClass({
   render() {
     return (
         <div>
@@ -16,4 +16,4 @@ export default class NotFound extends Component {
         </div>
     )
   }
-}
+})

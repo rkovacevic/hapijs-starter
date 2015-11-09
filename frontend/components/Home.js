@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import 'bootstrap-webpack'
 import { Panel, Button } from 'react-bootstrap'
 
-export default class Home extends Component {
+export default React.createClass({
   render() {
     return (
         <div>
@@ -13,4 +13,4 @@ export default class Home extends Component {
         </div>
     );
   }
-}
+})

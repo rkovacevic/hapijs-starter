@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
 import './App.css'
 
-export default class App extends Component {
+export default React.createClass({
 
     render() {
         return (
@@ -27,4 +27,4 @@ export default class App extends Component {
             </div>
         )
     }
-}
+})

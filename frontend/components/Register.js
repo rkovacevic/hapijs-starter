@@ -2,66 +2,64 @@ import React, { Component } from 'react'
 import 'bootstrap-webpack'
 import { Input, ButtonInput } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import { History } from 'react-router'
 import restful, { fetchBackend } from 'restful.js';
 
 const api = restful('/api', fetchBackend(fetch));
 
-class Register extends Component {
-    
-    constructor() {
-        super()
-        
-        let that = this
+export default React.createClass({
+        mixins: [ History ],
 
-        this.state = {
-            username: {
-                value: '',
-                dirty: false,
-                errorMessage: undefined
-            },
-            password: {
-                value: '',
-                dirty: false,
-                errorMessage: undefined
-            },
-            repeatPassword: {
-                value: '',
-                dirty: false,
-                errorMessage: undefined
+        getInitialState() {
+            return {
+                username: {
+                    value: '',
+                    dirty: false,
+                    errorMessage: undefined
+                },
+                password: {
+                    value: '',
+                    dirty: false,
+                    errorMessage: undefined
+                },
+                repeatPassword: {
+                    value: '',
+                    dirty: false,
+                    errorMessage: undefined
+                }
             }
-        }
+        },
 
-        this.updateState = function(e) {
+        updateState(e) {
             let stateUpdate = {}
             stateUpdate[e.target.name] = {
                 value: e.target.value,
                 dirty: true,
                 errorMessage: undefined
             }
-            that.setState(stateUpdate)
-        }
+            this.setState(stateUpdate)
+        },
 
-        this.onSubmit = function(e) {
+        onSubmit(e) {
             e.preventDefault()
             api.all('users').post({
-                username: that.state.username.value,
-                password: that.state.password.value
+                username: this.state.username.value,
+                password: this.state.password.value
             })
-            .then(result => {
-                that.context.history.pushState(undefined, '/')
-                console.log(result)
-            })
-            .catch(error => {
-                console.log('catch')
-                console.dir(error.response.data.validationErrors)
-            })
-        }
-    }
+                .then(result => {
+                    this.context.history.pushState(undefined, '/')
+                    console.log(result)
+                })
+                .catch(error => {
+                    console.log('catch')
+                    console.dir(error.response.data.validationErrors)
+                })
+        },
 
-    render() {
-        console.dir(this.context.history)
-        let styles = {}
-        let helps = {}
+        render() {
+            console.dir(this.context.history)
+            let styles = {}
+            let helps = {}
 
         if (this.state.username.dirty && this.state.username.value.length < 5) {
             helps.username = 'You need to enter a username, at least 5 characters long'
@@ -105,10 +103,4 @@ class Register extends Component {
             </div>
         )
     }
-}
-
-Register.contextTypes = {
-    history: React.PropTypes.object.isRequired
-}
-
-export default Register
+})
