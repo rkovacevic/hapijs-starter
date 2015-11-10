@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/rkovacevic/hapijs-starter#readme",
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "boom": "^3.0.0",
     "bootstrap": "^3.3.5",
     "bootstrap-webpack": "0.0.5",
@@ -45,6 +46,7 @@
     "good": "^6.4.0",
     "good-console": "^5.1.0",
     "hapi": "^11.0.3",
+    "hapi-auth-cookie": "^3.1.0",
     "history": "^1.13.0",
     "imports-loader": "^0.6.5",
     "inert": "^3.2.0",

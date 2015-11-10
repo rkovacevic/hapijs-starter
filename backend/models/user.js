@@ -1,4 +1,5 @@
 var Sequelize = require('sequelize')
+var bcrypt = require('bcrypt')
 
 module.exports = function(sequelize, DataTypes) {
     var User = sequelize.define('User', {
@@ -18,11 +19,27 @@ module.exports = function(sequelize, DataTypes) {
         password: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        scope: {
+            type: Sequelize.STRING,
+            allowNull: false
         }
     }, {
+        classMethods: {
+            hashPassword: function(password, done) {
+                return bcrypt.genSalt(10, function(err, salt) {
+                    return bcrypt.hash(password, salt, function(error, encrypted) {
+                        this.salt = salt
+                        return done(encrypted)
+                    })
+                })
+            }
+        },
         instanceMethods: {
-            bla: function() {
-
+            verifyPassword: function(password, done) {
+                return bcrypt.compare(password, this.password, function(err, res) {
+                    return done(err === undefined)
+                })
             }
         }
     })
