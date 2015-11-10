@@ -8,58 +8,61 @@ import restful, { fetchBackend } from 'restful.js';
 const api = restful('/api', fetchBackend(fetch));
 
 export default React.createClass({
-        mixins: [ History ],
+    mixins: [ History ],
+    
+    contextTypes: {
+        setUser: React.PropTypes.func
+    },
 
-        getInitialState() {
-            return {
-                username: {
-                    value: '',
-                    dirty: false,
-                    errorMessage: undefined
-                },
-                password: {
-                    value: '',
-                    dirty: false,
-                    errorMessage: undefined
-                },
-                repeatPassword: {
-                    value: '',
-                    dirty: false,
-                    errorMessage: undefined
-                }
-            }
-        },
-
-        updateState(e) {
-            let stateUpdate = {}
-            stateUpdate[e.target.name] = {
-                value: e.target.value,
-                dirty: true,
+    getInitialState() {
+        return {
+            username: {
+                value: '',
+                dirty: false,
+                errorMessage: undefined
+            },
+            password: {
+                value: '',
+                dirty: false,
+                errorMessage: undefined
+            },
+            repeatPassword: {
+                value: '',
+                dirty: false,
                 errorMessage: undefined
             }
-            this.setState(stateUpdate)
-        },
+        }
+    },
 
-        onSubmit(e) {
-            e.preventDefault()
-            api.all('users').post({
-                username: this.state.username.value,
-                password: this.state.password.value
-            })
-                .then(result => {
-                    this.context.history.pushState(undefined, '/')
-                    console.log(result)
-                })
-                .catch(error => {
-                    console.log('catch')
-                    console.dir(error.response.data.validationErrors)
-                })
-        },
+    updateState(e) {
+        let stateUpdate = {}
+        stateUpdate[e.target.name] = {
+            value: e.target.value,
+            dirty: true,
+            errorMessage: undefined
+        }
+        this.setState(stateUpdate)
+    },
 
-        render() {
-            console.dir(this.context.history)
-            let styles = {}
-            let helps = {}
+    onSubmit(e) {
+        e.preventDefault()
+        api.all('users').post({
+            username: this.state.username.value,
+            password: this.state.password.value
+        })
+        .then(result => {
+            this.context.setUser(result)
+            this.context.history.pushState(undefined, '/')
+        })
+        .catch(error => {
+            console.log('catch')
+            console.dir(error.response.data.validationErrors)
+        })
+    },
+
+    render() {
+        let styles = {}
+        let helps = {}
 
         if (this.state.username.dirty && this.state.username.value.length < 5) {
             helps.username = 'You need to enter a username, at least 5 characters long'

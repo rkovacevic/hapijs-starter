@@ -6,6 +6,27 @@ import { LinkContainer } from 'react-router-bootstrap'
 import './App.css'
 
 export default React.createClass({
+    
+    childContextTypes: {
+        setUser: React.PropTypes.func
+    },
+
+    getChildContext: function() {
+        return {
+            setUser: this.setUser
+        }
+    },
+
+    getInitialState() {
+        return {
+            user: undefined
+        }
+    },
+
+    setUser(user) {
+        console.log('setting user')
+        this.setState({user: user})
+    },
 
     render() {
         return (
