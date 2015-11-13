@@ -3,9 +3,7 @@ import 'bootstrap-webpack'
 import { Input, ButtonInput } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { History } from 'react-router'
-import restful, { fetchBackend } from 'restful.js';
-
-const api = restful('/api', fetchBackend(fetch));
+import api from '../services/api'
 
 export default React.createClass({
     mixins: [ History ],
