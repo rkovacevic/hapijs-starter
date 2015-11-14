@@ -4,7 +4,8 @@
   "description": "Skeleton project with HapiJS",
   "main": "backend/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "unit": "./node_modules/.bin/jasmine-node test",
+    "test": "./node_modules/.bin/istanbul cover --include-all-sources -i \"backend/**/*.js\" ./node_modules/.bin/jasmine-node test",
     "start": "node backend/server.js",
     "build": "webpack -p --progress --colors",
     "dev": "webpack --progress --colors --watch & nodemon",
@@ -18,6 +19,10 @@
     "production": {
       "dialect": "sqlite",
       "storage": "./db.sqlite"
+    },
+    "test": {
+      "dialect": "sqlite",
+      "storage": "./db.test.sqlite"
     }
   },
   "repository": {
@@ -77,6 +82,8 @@
     "css-loader": "^0.21.0",
     "eslint": "^1.8.0",
     "eslint-plugin-react": "^3.6.2",
+    "istanbul": "^0.4.0",
+    "jasmine-node": "^1.14.5",
     "nodemon": "^1.8.0",
     "react-hot-loader": "^1.3.0",
     "style-loader": "^0.13.0",

@@ -49,7 +49,7 @@ server.register(plugins, err => {
         scope: 'user'
     })
 
-    models.sequelize.sync(/*{force: true}*/).then(() => {
+    models.sequelize.sync({force: (process.env.NODE_ENV === 'test')}).then(() => {
         server.start( err => {
             if (err) throw err
             console.log('Server running at:', server.info.uri)

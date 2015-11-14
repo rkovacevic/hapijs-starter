@@ -30,3 +30,4 @@ node_modules
 
 build
 db.sqlite
+db.test.sqlite
