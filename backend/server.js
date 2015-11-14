@@ -38,6 +38,9 @@ server.register(plugins, err => {
     server.auth.strategy('base', 'cookie', {
         password: 'supersecretpassword', // cookie secret
         cookie: 'app-cookie', // Cookie name
+        isHttpOnly: true,
+        path: '/api',
+        isSecure: false,
         ttl: 24 * 60 * 60 * 1000 // Set session to 1 day
     })
 

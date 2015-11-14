@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom'
 import { Router, IndexRoute, Route, Link, History } from 'react-router'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 
+import {polyfill} from 'es6-promise'
+polyfill()
+
 import App from './components/App'
 import Home from './components/Home'
 import About from './components/About'

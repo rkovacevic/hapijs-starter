@@ -46,8 +46,9 @@ module.exports = [{
                 .then(user => {
                     user.verifyPassword(request.payload.password, (valid) => {
                         if (valid) {
-                            request.auth.session.set(user);
-                            return reply('You\'re in');
+                            request.auth.session.set(user)
+                            delete user.dataValues.password
+                            return reply(user);
                         } else {
                             return reply(Boom.unauthorized('Bad credentials'))
                         }

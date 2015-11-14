@@ -4,16 +4,19 @@ import { Navbar, NavBrand, NavItem, NavDropdown, Nav, MenuItem, Panel, Button } 
 import { Link } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
 import './App.css'
+import api from '../services/api'
 
 export default React.createClass({
     
     childContextTypes: {
-        setUser: React.PropTypes.func
+        getUser: React.PropTypes.object,
+        updateUser: React.PropTypes.func
     },
 
     getChildContext: function() {
         return {
-            setUser: this.setUser
+            getUser: this.state.user,
+            updateUser: this.updateUser
         }
     },
 
@@ -23,9 +26,18 @@ export default React.createClass({
         }
     },
 
-    setUser(user) {
+    updateUser() {
         console.log('setting user')
-        this.setState({user: user})
+        api.all('users').get('me').then((user) => {
+            console.log(user)
+            this.setState({user: user})
+        }).catch((error) => {
+            this.setState({user: undefined})
+        })
+    },
+
+    componentDidMount() {
+        this.updateUser()
     },
 
     render() {

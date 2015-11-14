@@ -9,7 +9,7 @@ export default React.createClass({
     mixins: [ History ],
     
     contextTypes: {
-        setUser: React.PropTypes.func
+        updateUser: React.PropTypes.func
     },
 
     getInitialState() {
@@ -49,7 +49,7 @@ export default React.createClass({
             password: this.state.password.value
         })
         .then(result => {
-            this.context.setUser(result)
+            this.context.updateUser()
             this.context.history.pushState(undefined, '/')
         })
         .catch(error => {
