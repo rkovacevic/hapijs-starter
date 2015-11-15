@@ -2,11 +2,11 @@
   "name": "hapijs-starter",
   "version": "1.0.0",
   "description": "Skeleton project with HapiJS",
-  "main": "backend/server.js",
+  "main": "backend/index.js",
   "scripts": {
     "unit": "./node_modules/.bin/jasmine-node test",
     "test": "./node_modules/.bin/istanbul cover --include-all-sources -i \"backend/**/*.js\" ./node_modules/.bin/jasmine-node test",
-    "start": "node backend/server.js",
+    "start": "node backend/index.js",
     "build": "webpack -p --progress --colors",
     "dev": "webpack --progress --colors --watch & nodemon",
     "lint": "eslint --ignore-pattern **/bundle*.js --ext .js,.jsx frontend/**/*.js"
@@ -40,6 +40,7 @@
   "homepage": "https://github.com/rkovacevic/hapijs-starter#readme",
   "dependencies": {
     "bcrypt": "^0.8.5",
+    "bluebird": "^3.0.5",
     "boom": "^3.0.0",
     "bootstrap": "^3.3.5",
     "bootstrap-webpack": "0.0.5",
