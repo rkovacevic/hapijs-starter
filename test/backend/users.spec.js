@@ -20,7 +20,7 @@ describe('Users', () => {
         })
     })
 
-    it('/api/users/me returns 401 unauthorized, without auth', (done) => {
+    it('returns 401 unauthorized, without auth', (done) => {
         server.inject({
             method: "GET",
             url: "/api/users/me"
@@ -30,4 +30,87 @@ describe('Users', () => {
         })
     })
 
+    it('returns credentials on /api/users/me', (done) => {
+        server.inject({
+            method: "GET",
+            url: "/api/users/me",
+            credentials: {
+            	username: 'homer',
+            	scope: 'user'
+            }
+        }, (response) => {
+            expect(response.statusCode).toBe(200)
+            expect(response.result.username).toBe('homer')
+            done()
+        })
+    })
+
+    it('has basic auth functionality', (done) => {
+        server.inject({
+            method: "POST",
+            url: "/api/users",
+            payload: {
+            	username: 'homer',
+            	password: 'beavis'
+            }
+        }, (registerResponse) => {
+            expect(registerResponse.statusCode).toBe(200)
+            server.inject({
+	            method: "POST",
+	            url: "/api/users/login",
+	            payload: {
+	            	username: 'homer',
+	            	password: 'beavis'
+	            }
+	        }, (loginResponse) => {
+	            expect(loginResponse.statusCode).toBe(200)
+	            server.inject({
+		            method: "GET",
+		            url: "/api/users/me",
+		            headers: { cookie: loginResponse.headers['set-cookie'][0].split(';')[0] }
+		        }, (meResponse) => {
+		            expect(meResponse.statusCode).toBe(200)
+		            expect(meResponse.result.username).toBe('homer')
+		            done()
+		        })
+	        })
+        })
+    })
+
+	it('rejects non unique username', (done) => {
+        server.inject({
+            method: "POST",
+            url: "/api/users",
+            payload: {
+            	username: 'homer',
+            	password: 'beavis'
+            }
+        }, (registerResponse) => {
+            server.inject({
+	            method: "POST",
+	            url: "/api/users",
+	            payload: {
+	            	username: 'homer',
+	            	password: 'beavis'
+	            }
+	        }, (registerAgainResponse) => {
+	        	expect(registerAgainResponse.statusCode).toBe(422)
+	        	done()
+	        })
+        })
+    })
+
+	it('refuses invalid login', (done) => {
+		server.inject({
+			method: "POST",
+	        url: "/api/users/login",
+	        payload: {
+	          	username: 'invalid',
+	           	password: 'credentials'
+	        }
+	    }, (loginResponse) => {
+	    	expect(loginResponse.statusCode).toBe(401)
+	    	done()
+	    })
+	})
 })

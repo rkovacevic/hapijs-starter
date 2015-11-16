@@ -4,8 +4,8 @@
   "description": "Skeleton project with HapiJS",
   "main": "backend/index.js",
   "scripts": {
-    "unit": "./node_modules/.bin/jasmine JASMINE_CONFIG_PATH=jasmine.json",
-    "test": "./node_modules/.bin/istanbul cover --include-all-sources -i \"backend/**/*.js\" ./node_modules/.bin/jasmine JASMINE_CONFIG_PATH=jasmine.json",
+    "unit": "NODE_ENV=test ./node_modules/.bin/jasmine JASMINE_CONFIG_PATH=jasmine.json",
+    "test": "NODE_ENV=test ./node_modules/.bin/istanbul cover --include-all-sources -i \"backend/**/*.js\" ./node_modules/.bin/jasmine JASMINE_CONFIG_PATH=jasmine.json",
     "start": "node backend/index.js",
     "build": "webpack -p --progress --colors",
     "dev": "webpack --progress --colors --watch & nodemon",
