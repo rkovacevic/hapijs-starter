@@ -44,17 +44,18 @@ export default React.createClass({
 
     onSubmit(e) {
         e.preventDefault()
-        api.all('users').post({
+        api.post('/api/users', {
             username: this.state.username.value,
             password: this.state.password.value
         })
         .then(result => {
+            console.dir(result)
             this.context.updateUser()
             this.context.history.pushState(undefined, '/')
         })
         .catch(error => {
-            console.log('catch')
-            console.dir(error.response.data.validationErrors)
+            console.dir(error)
+            console.log(error.statusCode)
         })
     },
 

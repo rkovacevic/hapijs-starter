@@ -7,6 +7,7 @@ import api from '../services/api'
 export default React.createClass({
 
     contextTypes: {
+        getUser: React.PropTypes.object,
         updateUser: React.PropTypes.func
     },
 
@@ -16,7 +17,7 @@ export default React.createClass({
 
     onSubmit(e) {
         e.preventDefault()
-        api.all('users/login').post({
+        api.post('/api/users/login', {
             username: this.refs.username.getValue(),
             password: this.refs.password.getValue()
         })
@@ -25,15 +26,22 @@ export default React.createClass({
             this.context.updateUser()
             //this.context.history.pushState(undefined, '/')
         })
-        .catch(error => {
-            console.log('catch')
-            console.dir(error)
-        })
     },
 
     render() {
         let styles = {}
         let helps = {}
+
+        let loginForm
+        
+        
+            loginForm = 
+            <form onSubmit={this.onSubmit}>
+                <Input ref="username" type="text" label="Username" bsStyle={styles.username} help={helps.username} placeholder="Enter username" onBlur={this.updateState} />
+                <Input ref="password" type="password" label="Password" placeholder="Enter password" bsStyle={styles.password} help={helps.password} onBlur={this.updateState} />
+                <ButtonInput type="submit" value="Login" bsSize="large" bsStyle="primary"/>
+            </form>
+        
 
         return (
             <div>
@@ -42,11 +50,7 @@ export default React.createClass({
                 <Button bsStyle="primary" bsSize="large">OK, excellent</Button>
                 <hr/>
 
-                <form onSubmit={this.onSubmit}>
-                    <Input ref="username" type="text" label="Username" bsStyle={styles.username} help={helps.username} placeholder="Enter username" onBlur={this.updateState} />
-                    <Input ref="password" type="password" label="Password" placeholder="Enter password" bsStyle={styles.password} help={helps.password} onBlur={this.updateState} />
-                    <ButtonInput type="submit" value="Login" bsSize="large" bsStyle="primary"/>
-                </form>
+                {loginForm}    
             </Panel>
             </div>
         );

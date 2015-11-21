@@ -30,6 +30,15 @@ module.exports.createServer = function(connection) {
 
     server.connection(connection)
     
+    server.ext('onPreResponse', function(request, reply) {
+        if (request.response.isBoom) {
+            request.response.output.headers['Access-Control-Allow-Credentials'] = 'true'
+        } else {
+            request.response.header('Access-Control-Allow-Credentials', 'true')
+        }
+        return reply.continue()
+    })
+
     var registerDeferred = Promise.defer()
     server.register(plugins, (err) => {
         if (err) registerDeferred.reject(err)

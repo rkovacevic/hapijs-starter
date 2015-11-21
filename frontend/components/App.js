@@ -27,11 +27,11 @@ export default React.createClass({
     },
 
     updateUser() {
-        console.log('setting user')
-        api.all('users').get('me').then((user) => {
-            console.log(user)
+        api.get('/api/users/me')
+        .then(user => {
             this.setState({user: user})
-        }).catch((error) => {
+        })
+        .catch(error => {
             this.setState({user: undefined})
         })
     },
