@@ -1,27 +1,30 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Router, IndexRoute, Route, Link, History} from 'react-router'
-import createBrowserHistory from 'history/lib/createBrowserHistory'
+import createHistory from 'history/lib/createBrowserHistory'
+import thunk from 'redux-thunk'
+import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
+import {Provider} from 'react-redux'
+import {reduxReactRouter, routerStateReducer, ReduxRouter} from 'redux-router'
 
 import {polyfill} from 'es6-promise'
 polyfill()
 
-import App from './containers/App'
-import Home from './containers/Home'
-import About from './containers/About'
-import Register from './containers/Register'
-import NotFound from './containers/NotFound'
+import reducers from './reducers'
+import routes from './routes'
 
-const history = createBrowserHistory()
+const store = compose(
+    applyMiddleware(thunk),
+    reduxReactRouter({
+        routes,
+        createHistory
+    })
+)(createStore)(reducers);
 
 let node =
-    <Router history={history}>
-    	<Route path="/" component={App}>
-	      	<IndexRoute component={Home}/>
-	      	<Route path="about" component={About}/>
-	      	<Route path="register" component={Register}/>
-	      	<Route path="*" component={NotFound}/>
-    	</Route>
-  	</Router>
+    <Provider store={store}>
+		<ReduxRouter>
+	    	{routes}
+	  	</ReduxRouter>
+  	</Provider>
 
 ReactDOM.render(node, document.getElementById('root'))
