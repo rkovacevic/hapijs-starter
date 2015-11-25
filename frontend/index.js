@@ -1,21 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Router, IndexRoute, Route, Link, History } from 'react-router'
+import {Router, IndexRoute, Route, Link, History} from 'react-router'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 
 import {polyfill} from 'es6-promise'
 polyfill()
 
-import App from './components/App'
-import Home from './components/Home'
-import About from './components/About'
-import Register from './components/Register'
-import NotFound from './components/NotFound'
+import App from './containers/App'
+import Home from './containers/Home'
+import About from './containers/About'
+import Register from './containers/Register'
+import NotFound from './containers/NotFound'
 
 const history = createBrowserHistory()
 
-ReactDOM.render(
-	<Router history={history}>
+let node =
+    <Router history={history}>
     	<Route path="/" component={App}>
 	      	<IndexRoute component={Home}/>
 	      	<Route path="about" component={About}/>
@@ -23,4 +23,5 @@ ReactDOM.render(
 	      	<Route path="*" component={NotFound}/>
     	</Route>
   	</Router>
-, document.getElementById('root'))
+
+ReactDOM.render(node, document.getElementById('root'))
