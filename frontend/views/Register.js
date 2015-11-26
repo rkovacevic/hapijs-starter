@@ -1,5 +1,4 @@
-import React, {
-    Component} from 'react'
+import React from 'react'
 import 'bootstrap-webpack'
 import {Input, ButtonInput} from 'react-bootstrap'
 import {connect} from 'react-redux'
