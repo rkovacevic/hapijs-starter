@@ -1,5 +1,5 @@
 import {createReducer} from '../utils'
-import {REGISTRATION_REQUEST, REGISTRATION_FAILURE, REGISTRATION_SUCCESS} from '../constants'
+import actionTypes from '../constants/actionTypes'
 import {pushState} from 'redux-router'
 
 const initialState = {
@@ -7,13 +7,13 @@ const initialState = {
 }
 
 export default createReducer(initialState, {
-    [REGISTRATION_REQUEST]: (state, payload) => {
+    [actionTypes.REGISTRATION_REQUEST]: (state, payload) => {
         return state
-    }, [REGISTRATION_SUCCESS]: (state, payload) => {
+    }, [actionTypes.REGISTRATION_SUCCESS]: (state, payload) => {
         return state
-    }, [REGISTRATION_FAILURE]: (state, payload) => {
+    }, [actionTypes.REGISTRATION_FAILURE]: (state, payload) => {
         return Object.assign({}, state, {
-            'validationErrors': payload.validationErrors
+            'validationErrors': payload.validationError.validationErrors
         })
     }
 })

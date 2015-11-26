@@ -1,11 +1,11 @@
 import React from 'react'
 import {IndexRoute, Route} from 'react-router'
 
-import App from './containers/App'
-import Home from './containers/Home'
-import About from './containers/About'
-import Register from './containers/Register'
-import NotFound from './containers/NotFound'
+import App from './views/App'
+import Home from './views/Home'
+import About from './views/About'
+import Register from './views/Register'
+import NotFound from './views/NotFound'
 
 
 export default (

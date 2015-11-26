@@ -1,19 +1,16 @@
-import React, { Component } from 'react'
+import React, {
+    Component} from 'react'
 import 'bootstrap-webpack'
-import { Input, ButtonInput } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
-import { History } from 'react-router'
-import api from '../services/api'
+import {Input, ButtonInput} from 'react-bootstrap'
+import {connect} from 'react-redux'
+import {registerUser} from '../actions/register'
 
-export default React.createClass({
-    mixins: [ History ],
-    
-    contextTypes: {
-        updateUser: React.PropTypes.func
-    },
+export class Register extends React.Component {
 
-    getInitialState() {
-        return {
+    constructor(props) {
+        super(props)
+
+        this.state = {
             username: {
                 value: '',
                 dirty: false,
@@ -30,7 +27,10 @@ export default React.createClass({
                 errorMessage: undefined
             }
         }
-    },
+
+        this.updateState = this.updateState.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
+    }
 
     updateState(e) {
         let stateUpdate = {}
@@ -40,24 +40,16 @@ export default React.createClass({
             errorMessage: undefined
         }
         this.setState(stateUpdate)
-    },
+    }
 
     onSubmit(e) {
         e.preventDefault()
-        api.post('/api/users', {
+
+        this.props.dispatch(registerUser({
             username: this.state.username.value,
             password: this.state.password.value
-        })
-        .then(result => {
-            console.dir(result)
-            this.context.updateUser()
-            this.context.history.pushState(undefined, '/')
-        })
-        .catch(error => {
-            console.dir(error)
-            console.log(error.statusCode)
-        })
-    },
+        }))
+    }
 
     render() {
         let styles = {}
@@ -67,12 +59,12 @@ export default React.createClass({
             helps.username = 'You need to enter a username, at least 5 characters long'
             styles.username = 'error';
         }
-        
+
         if (this.state.password.dirty && this.state.password.value.length < 5) {
             helps.password = 'You need to enter a password, at least 5 characters long'
             styles.password = 'error'
         }
-        
+
         if (this.state.repeatPassword.dirty && this.state.repeatPassword.value !== this.state.password.value) {
             helps.repeatPassword = 'Passwords need to match'
             styles.repeatPassword = 'error'
@@ -105,4 +97,10 @@ export default React.createClass({
             </div>
         )
     }
+}
+
+const mapStateToProps = (state) => ({
+    validationErrors: state.validationErrors
 })
+
+export default connect(mapStateToProps)(Register)
