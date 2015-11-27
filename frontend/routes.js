@@ -4,7 +4,7 @@ import {IndexRoute, Route} from 'react-router'
 import App from './views/App'
 import Home from './views/Home'
 import About from './views/About'
-import Register from './views/Register'
+import Register from './views/register'
 import NotFound from './views/NotFound'
 
 
