@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import 'bootstrap-webpack'
 import { Panel, Button } from 'react-bootstrap'
 
 export default React.createClass({

@@ -23,33 +23,39 @@ export function registrationFailure(validationErrors) {
     }
 }
 
+let validateUser = function(user) {
+    let validationErrors = []
+
+    if (user.username.length < 5) {
+        validationErrors.push({
+            path: 'username',
+            message: 'Must be at least 5 characters long'
+        })
+    }
+
+    if (user.password.length < 5) {
+        validationErrors.push({
+            path: 'password',
+            message: 'Must be at least 5 characters long'
+        })
+    }
+
+    if (user.repeatPassword !== user.password) {
+        validationErrors.push({
+            path: 'repeatPassword',
+            message: 'Passwords need to match'
+        })
+    }
+
+    return validationErrors
+}
+
 export function registerUser(user) {
 
     return function(dispatch) {
         dispatch(registrationRequest());
 
-        let validationErrors = []
-
-        if (user.username.length < 5) {
-            validationErrors.push({
-                path: 'username',
-                message: 'Must be at least 5 characters long'
-            })
-        }
-
-        if (user.password.length < 5) {
-            validationErrors.push({
-                path: 'password',
-                message: 'Must be at least 5 characters long'
-            })
-        }
-
-        if (user.repeatPassword !== user.password) {
-            validationErrors.push({
-                path: 'repeatPassword',
-                message: 'Passwords need to match'
-            })
-        }
+        let validationErrors = validateUser(user)
 
         if (validationErrors.length > 0) {
             dispatch(registrationFailure(validationErrors))

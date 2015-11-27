@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import 'bootstrap-webpack'
 import { Well, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 

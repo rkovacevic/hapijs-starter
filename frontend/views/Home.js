@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import 'bootstrap-webpack'
 import { Input, ButtonInput } from 'react-bootstrap'
 import { Panel, Button } from 'react-bootstrap'
 import api from '../services/api'
@@ -33,15 +32,15 @@ export default React.createClass({
         let helps = {}
 
         let loginForm
-        
-        
-            loginForm = 
+
+
+            loginForm =
             <form onSubmit={this.onSubmit}>
                 <Input ref="username" type="text" label="Username" bsStyle={styles.username} help={helps.username} placeholder="Enter username" onBlur={this.updateState} />
                 <Input ref="password" type="password" label="Password" placeholder="Enter password" bsStyle={styles.password} help={helps.password} onBlur={this.updateState} />
                 <ButtonInput type="submit" value="Login" bsSize="large" bsStyle="primary"/>
             </form>
-        
+
 
         return (
             <div>
@@ -50,7 +49,7 @@ export default React.createClass({
                 <Button bsStyle="primary" bsSize="large">OK, excellent</Button>
                 <hr/>
 
-                {loginForm}    
+                {loginForm}
             </Panel>
             </div>
         );
