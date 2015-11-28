@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import 'bootstrap-webpack'
-import { Navbar, NavBrand, NavItem, NavDropdown, Nav, MenuItem, Panel, Button } from 'react-bootstrap'
+import { Navbar, NavBrand, NavItem, NavDropdown, Nav, MenuItem, Panel, Button, Input } from 'react-bootstrap'
 import { Link } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
 import './App.css'
@@ -35,16 +35,29 @@ export default class App extends React.Component {
     render() {
         return (
             <div>
-                <Navbar>
-                    <NavBrand><Link to="/">React-Bootstrap</Link></NavBrand>
-                    <Nav>
-                        <LinkContainer to="/" onlyActiveOnIndex={true}>
-                            <NavItem>Home</NavItem>
-                        </LinkContainer>
-                        <LinkContainer to="/about">
-                            <NavItem>About</NavItem>
-                        </LinkContainer>
-                    </Nav>
+                <Navbar inverse>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <Link to="/">React-Bootstrap</Link>
+                        </Navbar.Brand>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
+
+                    <Navbar.Collapse>
+                        <Nav pullRight>
+                            <LinkContainer to="/login">
+                                <NavItem>Login</NavItem>
+                            </LinkContainer>
+                        </Nav>
+                        <Nav>
+                            <LinkContainer to="/" onlyActiveOnIndex={true}>
+                                <NavItem>Home</NavItem>
+                            </LinkContainer>
+                            <LinkContainer to="/about">
+                                <NavItem>About</NavItem>
+                            </LinkContainer>
+                        </Nav>
+                    </Navbar.Collapse>
                 </Navbar>
                 <div className="container">
                     {this.props.children}

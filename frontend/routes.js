@@ -5,6 +5,7 @@ import App from './views/App'
 import Home from './views/home'
 import About from './views/about'
 import Register from './views/register'
+import Login from './views/login'
 import NotFound from './views/notFound'
 
 
@@ -13,6 +14,7 @@ export default (
       	<IndexRoute component={Home}/>
       	<Route path="about" component={About}/>
       	<Route path="register" component={Register}/>
+        <Route path="login" component={Login}/>
       	<Route path="*" component={NotFound}/>
    	</Route>
 )
