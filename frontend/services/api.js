@@ -14,7 +14,7 @@ let execute = function(uri, options) {
         })
         .then(response => {
             if (response.ok) {
-				if (response.headers.get("content-type").indexOf("application/json") !== -1) {
+				if (response.headers.get('content-type').indexOf('application/json') !== -1) {
 					return response.json();
 				} else {
 					throw new TypeError('Response from "' + response.url + '" has unexpected "content-type"');
