@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Input, ButtonInput } from 'react-bootstrap'
 import { Panel, Button } from 'react-bootstrap'
-import api from '../services/api'
+import api from '../../services/api'
 
 export default React.createClass({
 

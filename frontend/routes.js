@@ -2,10 +2,10 @@ import React from 'react'
 import {IndexRoute, Route} from 'react-router'
 
 import App from './views/App'
-import Home from './views/Home'
-import About from './views/About'
+import Home from './views/home'
+import About from './views/about'
 import Register from './views/register'
-import NotFound from './views/NotFound'
+import NotFound from './views/notFound'
 
 
 export default (

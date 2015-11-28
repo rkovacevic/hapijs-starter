@@ -7,18 +7,6 @@ import './App.css'
 import api from '../services/api'
 
 export default React.createClass({
-    
-    childContextTypes: {
-        getUser: React.PropTypes.object,
-        updateUser: React.PropTypes.func
-    },
-
-    getChildContext: function() {
-        return {
-            getUser: this.state.user,
-            updateUser: this.updateUser
-        }
-    },
 
     getInitialState() {
         return {

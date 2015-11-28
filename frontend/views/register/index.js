@@ -10,6 +10,10 @@ export class Register extends React.Component {
         this.onSubmit = this.onSubmit.bind(this)
     }
 
+    componentDidMount() {
+        this.refs.username.getInputDOMNode().focus()
+    }
+
     onSubmit(e) {
         e.preventDefault()
         this.props.dispatch(registerUser({
