@@ -6,13 +6,17 @@ import { LinkContainer } from 'react-router-bootstrap'
 import './App.css'
 import api from '../services/api'
 
-export default React.createClass({
+export default class App extends React.Component {
 
-    getInitialState() {
-        return {
+    constructor(props) {
+        super(props)
+
+        this.state = {
             user: undefined
         }
-    },
+
+        this.updateUser = this.updateUser.bind(this)
+    }
 
     updateUser() {
         api.get('/api/users/me')
@@ -22,11 +26,11 @@ export default React.createClass({
         .catch(error => {
             this.setState({user: undefined})
         })
-    },
+    }
 
     componentDidMount() {
         this.updateUser()
-    },
+    }
 
     render() {
         return (
@@ -48,4 +52,4 @@ export default React.createClass({
             </div>
         )
     }
-})
+}

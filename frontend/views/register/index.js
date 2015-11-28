@@ -3,15 +3,11 @@ import {Input, ButtonInput} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import {registerUser} from './actions'
 
-export class Register extends React.Component {
+class Register extends React.Component {
 
     constructor(props) {
         super(props)
         this.onSubmit = this.onSubmit.bind(this)
-    }
-
-    componentDidMount() {
-        this.refs.username.getInputDOMNode().focus()
     }
 
     onSubmit(e) {
@@ -36,7 +32,7 @@ export class Register extends React.Component {
 
         return (
             <div>
-                <h1>Register a new user</h1>
+                <h1>Register new user</h1>
                 <form onSubmit={this.onSubmit}>
                     <Input ref="username" type="text" label="Username" bsStyle={styles.username} help={helps.username} placeholder="Enter username" zindex={1} />
                     <Input ref="password" type="password" label="Password" placeholder="Enter password" bsStyle={styles.password} help={helps.password} zindex={2} />

@@ -1,18 +1,14 @@
 import React, { Component } from 'react'
 import { Input, ButtonInput } from 'react-bootstrap'
 import { Panel, Button } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import api from '../../services/api'
 
-export default React.createClass({
+export default class Home extends React.Component {
 
-    contextTypes: {
-        getUser: React.PropTypes.object,
-        updateUser: React.PropTypes.func
-    },
-
-    updateState() {
-
-    },
+    constructor(props) {
+        super(props)
+    }
 
     onSubmit(e) {
         e.preventDefault()
@@ -25,7 +21,7 @@ export default React.createClass({
             this.context.updateUser()
             //this.context.history.pushState(undefined, '/')
         })
-    },
+    }
 
     render() {
         let styles = {}
@@ -46,7 +42,9 @@ export default React.createClass({
             <div>
             <Panel id="main-panel">
                 <h1>Hello, world.</h1>
-                <Button bsStyle="primary" bsSize="large">OK, excellent</Button>
+                <LinkContainer to="/register">
+                    <Button bsStyle="primary" bsSize="large">Register</Button>
+                </LinkContainer>
                 <hr/>
 
                 {loginForm}
@@ -54,4 +52,4 @@ export default React.createClass({
             </div>
         );
     }
-})
+}

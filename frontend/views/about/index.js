@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Panel, Button } from 'react-bootstrap'
 
-export default React.createClass({
+export default class About extends React.Component {
+
     render() {
         return (
             <Panel id="main-panel">
@@ -10,4 +11,4 @@ export default React.createClass({
             </Panel>
         )
     }
-})
+}
