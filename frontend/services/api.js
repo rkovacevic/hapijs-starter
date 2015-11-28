@@ -9,8 +9,7 @@ let execute = function(uri, options) {
 
     return fetch(uri, options)
         .catch(error => {
-            // This error should be handled
-            console.dir(error)
+            throw error
         })
         .then(response => {
             if (response.ok) {
