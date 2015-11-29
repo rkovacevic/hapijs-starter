@@ -55,9 +55,30 @@ const api = {
 
         return execute(dispatch, uri, getOptions)
     },
+    delete: function(dispatch, uri, options) {
+        let getOptions = {
+            method: 'DELETE'
+        }
+        if (options !== undefined) {
+            Object.assign(getOptions, options)
+        }
+
+        return execute(dispatch, uri, getOptions)
+    },
     post: function(dispatch, uri, payload, options) {
         let postOptions = {
             method: 'POST',
+            body: JSON.stringify(payload)
+        }
+        if (options !== undefined) {
+            Object.assign(postOptions, options)
+        }
+
+        return execute(dispatch, uri, postOptions)
+    }
+    put: function(dispatch, uri, payload, options) {
+        let postOptions = {
+            method: 'PUT',
             body: JSON.stringify(payload)
         }
         if (options !== undefined) {
