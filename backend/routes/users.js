@@ -63,9 +63,10 @@ module.exports = [{
     method: 'GET',
     path: '/api/users/logout',
     config: {
+        auth: false,
         handler: function(request, reply) {
             request.auth.session.clear()
-            return reply('Logged out')
+            return reply({nessage: 'Logged out'})
         }
     }
 }]

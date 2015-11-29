@@ -75,7 +75,7 @@ const api = {
         }
 
         return execute(dispatch, uri, postOptions)
-    }
+    },
     put: function(dispatch, uri, payload, options) {
         let postOptions = {
             method: 'PUT',

@@ -1,18 +1,10 @@
 import { pushState } from 'redux-router'
+import { loggedIn } from '../app/actions'
 import api  from '../../services/api'
 
 export function loginRequest() {
     return {
         type: 'LOGIN_REQUEST',
-    }
-}
-
-export function loginSuccess(user) {
-    return {
-        type: 'LOGIN_SUCCESS',
-        payload: {
-            user: user
-        }
     }
 }
 
@@ -57,7 +49,7 @@ export function login(user) {
 
         api.post(dispatch, '/api/users/login', user)
         .then(result => {
-            dispatch(loginSuccess(result))
+            dispatch(loggedIn(result))
             dispatch(pushState(null, '/'))
         })
         .catch(error => {
