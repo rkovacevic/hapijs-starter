@@ -15,7 +15,7 @@ fs.readdirSync(__dirname)
     db[model.name] = model
 })
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+db.sequelize = sequelize
+db.Sequelize = Sequelize
 
-module.exports = db;
+module.exports = db

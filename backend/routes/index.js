@@ -13,7 +13,7 @@ routes.register = function(server) {
             server.route(route)
         })
     })
-    
+
     server.route({
         method: 'GET',
         path: '/{param*}',
@@ -40,4 +40,4 @@ routes.register = function(server) {
     })
 }
 
-module.exports = routes;
+module.exports = routes

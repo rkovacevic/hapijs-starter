@@ -46,7 +46,7 @@ let validateUser = function(user) {
 export function login(user) {
 
     return function(dispatch) {
-        dispatch(loginRequest());
+        dispatch(loginRequest())
 
         let validationErrors = validateUser(user)
 
