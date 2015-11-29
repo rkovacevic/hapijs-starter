@@ -63,12 +63,12 @@ export function registerUser(user) {
         }
 
         api.post('/api/users', user)
-            .then(result => {
-                dispatch(registrationSuccess(result))
-                dispatch(pushState(null, '/'))
-            })
-            .catch(error => {
-                dispatch(registrationFailure(error.validationErrors))
-            })
+        .then(result => {
+            dispatch(registrationSuccess(result))
+            dispatch(pushState(null, '/'))
+        })
+        .catch(error => {
+            dispatch(registrationFailure(error.validationErrors))
+        })
     }
 }

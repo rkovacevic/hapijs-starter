@@ -4,16 +4,16 @@ var routes = {}
 
 routes.register = function(server) {
     fs.readdirSync(__dirname)
-        .filter(function(file) {
-            return (file.indexOf('.') !== 0) && (file !== 'index.js')
+    .filter(function(file) {
+        return (file.indexOf('.') !== 0) && (file !== 'index.js')
+    })
+    .forEach(function(file) {
+        var routes = require(Path.join(__dirname, file))
+        routes.forEach(route => {
+            server.route(route)
         })
-        .forEach(function(file) {
-            var routes = require(Path.join(__dirname, file))
-            routes.forEach(route => {
-                server.route(route)
-            })
-        })
-
+    })
+    
     server.route({
         method: 'GET',
         path: '/{param*}',

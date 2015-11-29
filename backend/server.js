@@ -9,7 +9,7 @@ var Promise = require('bluebird')
 
 
 var plugins = [
-    Inert, 
+    Inert,
     authCookie,
     {
         register: Good,
@@ -29,7 +29,7 @@ module.exports.createServer = function(connection) {
     var server = new Hapi.Server()
 
     server.connection(connection)
-    
+
     server.ext('onPreResponse', function(request, reply) {
         if (request.response.isBoom) {
             request.response.output.headers['Access-Control-Allow-Credentials'] = 'true'
@@ -50,7 +50,7 @@ module.exports.createServer = function(connection) {
         models.sequelize.sync({force: (process.env.NODE_ENV === 'test')})
     ]).then(() => {
         routes.register(server)
-        
+
         server.auth.strategy('base', 'cookie', {
             password: 'supersecretpassword', // cookie secret
             cookie: 'app-cookie', // Cookie name

@@ -26,10 +26,10 @@ const store = compose(
 )(createStore)(reducers)
 
 let node =
-    <Provider store={store}>
-		<ReduxRouter>
-	    	{routes}
-	  	</ReduxRouter>
-  	</Provider>
+<Provider store={store}>
+    <ReduxRouter>
+        {routes}
+    </ReduxRouter>
+</Provider>
 
 ReactDOM.render(node, document.getElementById('root'))

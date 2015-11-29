@@ -56,22 +56,22 @@ export function login(user) {
         }
 
         api.post('/api/users/login', user)
-            .then(result => {
-                dispatch(loginSuccess(result))
-                dispatch(pushState(null, '/'))
-            })
-            .catch(error => {
-                const validationErrors = [
-                    {
-                        path: 'username',
-                        message: 'Incorrect username'
-                    },
-                    {
-                        path: 'password',
-                        message: '...or password'
-                    }
-                ]
-                dispatch(loginFailure(validationErrors))
-            })
+        .then(result => {
+            dispatch(loginSuccess(result))
+            dispatch(pushState(null, '/'))
+        })
+        .catch(error => {
+            const validationErrors = [
+                {
+                    path: 'username',
+                    message: 'Incorrect username'
+                },
+                {
+                    path: 'password',
+                    message: '...or password'
+                }
+            ]
+            dispatch(loginFailure(validationErrors))
+        })
     }
 }

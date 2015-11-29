@@ -20,15 +20,15 @@ module.exports = [{
             models.User.hashPassword(user.password, (encrypted) => {
                 user.password = encrypted
                 models.User.create(user)
-                    .then(user => {
-                        delete user.dataValues.password
-                        reply(user)
-                    })
-                    .catch(error => {
-                        var response = Boom.badData('Validation failed')
-                        response.output.payload.validationErrors = error.errors
-                        reply(response)
-                    })
+                .then(user => {
+                    delete user.dataValues.password
+                    reply(user)
+                })
+                .catch(error => {
+                    var response = Boom.badData('Validation failed')
+                    response.output.payload.validationErrors = error.errors
+                    reply(response)
+                })
             })
         }
     }
@@ -43,20 +43,20 @@ module.exports = [{
                     username: request.payload.username
                 }
             })
-                .then(user => {
-                    user.verifyPassword(request.payload.password, (valid) => {
-                        if (valid) {
-                            request.auth.session.set(user)
-                            delete user.dataValues.password
-                            return reply(user);
-                        } else {
-                            return reply(Boom.unauthorized('Bad credentials'))
-                        }
-                    })
+            .then(user => {
+                user.verifyPassword(request.payload.password, (valid) => {
+                    if (valid) {
+                        request.auth.session.set(user)
+                        delete user.dataValues.password
+                        return reply(user);
+                    } else {
+                        return reply(Boom.unauthorized('Bad credentials'))
+                    }
                 })
-                .catch(() => {
-                    return reply(Boom.unauthorized('Bad credentials'))
-                })
+            })
+            .catch(() => {
+                return reply(Boom.unauthorized('Bad credentials'))
+            })
         }
     }
 }, {

@@ -1,27 +1,27 @@
 let execute = function(uri, options) {
-	options = options || {}
-	options.credentials = options.credentials || 'same-origin'
+    options = options || {}
+    options.credentials = options.credentials || 'same-origin'
     if (options.headers === undefined) {
-    	options.headers = new Headers()
+        options.headers = new Headers()
     }
     options.headers.set('Content-Type', 'application/json')
     options.headers.set('Accept', 'application/json')
 
     return fetch(uri, options)
-        .catch(error => {
-            throw error
-        })
-        .then(response => {
-            if (response.ok) {
-				if (response.headers.get('content-type').indexOf('application/json') !== -1) {
-					return response.json();
-				} else {
-					throw new TypeError('Response from "' + response.url + '" has unexpected "content-type"');
-				}
+    .catch(error => {
+        throw error
+    })
+    .then(response => {
+        if (response.ok) {
+            if (response.headers.get('content-type').indexOf('application/json') !== -1) {
+                return response.json();
             } else {
-                return response.json().then(json => { throw json })
+                throw new TypeError('Response from "' + response.url + '" has unexpected "content-type"');
             }
-        })
+        } else {
+            return response.json().then(json => { throw json })
+        }
+    })
 }
 
 const api = {
