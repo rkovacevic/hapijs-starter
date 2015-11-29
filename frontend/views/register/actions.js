@@ -62,7 +62,7 @@ export function registerUser(user) {
             return
         }
 
-        api.post('/api/users', user)
+        api.post(dispatch, '/api/users', user)
         .then(result => {
             dispatch(registrationSuccess(result))
             dispatch(pushState(null, '/'))

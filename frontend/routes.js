@@ -7,6 +7,7 @@ import About from './views/about'
 import Register from './views/register'
 import Login from './views/login'
 import NotFound from './views/notFound'
+import ServerError from './views/serverError'
 
 
 export default (
@@ -15,6 +16,7 @@ export default (
         <Route path="about" component={About}/>
         <Route path="register" component={Register}/>
         <Route path="login" component={Login}/>
+        <Route path="serverError" component={ServerError}/>
         <Route path="*" component={NotFound}/>
     </Route>
 )

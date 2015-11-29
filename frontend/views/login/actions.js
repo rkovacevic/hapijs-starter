@@ -55,7 +55,7 @@ export function login(user) {
             return
         }
 
-        api.post('/api/users/login', user)
+        api.post(dispatch, '/api/users/login', user)
         .then(result => {
             dispatch(loginSuccess(result))
             dispatch(pushState(null, '/'))

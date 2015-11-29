@@ -29,7 +29,7 @@ export default class App extends React.Component {
     }
 
     componentDidMount() {
-        this.updateUser()
+        //this.updateUser()
     }
 
     render() {
