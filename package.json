@@ -5,6 +5,7 @@
   "main": "backend/index.js",
   "scripts": {
     "test": "NODE_ENV=test mocha --compilers js:babel-core/register test/**/*.spec.js",
+    "test:watch": "npm test -- --watch",
     "start": "node backend/index.js",
     "build": "webpack -p --progress --colors",
     "dev": "webpack --progress --colors --watch & nodemon",

@@ -103,6 +103,29 @@ describe('Users', () => {
         })
     })
 
+    it('rejects login with invalid password', (done) => {
+        server.inject({
+            method: 'POST',
+            url: '/api/users',
+            payload: {
+                username: 'homer',
+                password: 'beavis'
+            }
+        }, (registerResponse) => {
+            server.inject({
+                method: 'POST',
+                url: '/api/users/login',
+                payload: {
+                    username: 'homer',
+                    password: 'not-beavis'
+                }
+            }, (loginResponse) => {
+                expect(loginResponse.statusCode).to.equal(401)
+                done()
+            })
+        })
+    })
+
     it('refuses invalid login', (done) => {
         server.inject({
             method: 'POST',
