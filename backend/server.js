@@ -7,23 +7,25 @@ var routes = require('./routes')
 var authCookie = require('hapi-auth-cookie')
 var Promise = require('bluebird')
 
+var goodPlugin = {
+    register: Good,
+    options: {
+        reporters: [{
+            reporter: require('good-console'),
+            events: {
+                response: '*',
+                log: 'error'
+            }
+        }]
+    }
+}
 
 var plugins = [
     Inert,
-    authCookie,
-    {
-        register: Good,
-        options: {
-            reporters: [{
-                reporter: require('good-console'),
-                events: {
-                    response: '*',
-                    log: 'error'
-                }
-            }]
-        }
-    }
+    authCookie
 ]
+
+if (process.env.NODE_ENV !== 'test') plugins.push(goodPlugin)
 
 module.exports.createServer = function(connection) {
     var server = new Hapi.Server()
