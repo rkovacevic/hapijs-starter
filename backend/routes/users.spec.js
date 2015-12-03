@@ -1,5 +1,5 @@
 var expect = require('chai').expect
-var Server = require('../../backend/server')
+var Server = require('../server')
 
 describe('Users', () => {
 
