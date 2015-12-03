@@ -5,7 +5,7 @@ const initialState = {
 const reducers = {
     'REGISTER_FAILURE': (state, payload) => {
         return Object.assign({}, state, {
-            'validationErrors': payload
+            validationErrors: payload
         })
     }
 }
