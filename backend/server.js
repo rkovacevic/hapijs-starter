@@ -6,6 +6,7 @@ var models = require('./models')
 var routes = require('./routes')
 var authCookie = require('hapi-auth-cookie')
 var Promise = require('bluebird')
+var injectThen = require('inject-then')
 
 var goodPlugin = {
     register: Good,
@@ -25,7 +26,11 @@ var plugins = [
     authCookie
 ]
 
-if (process.env.NODE_ENV !== 'test') plugins.push(goodPlugin)
+if (process.env.NODE_ENV !== 'test') {
+    plugins.push(goodPlugin)
+} else {
+    plugins.push(injectThen)
+}
 
 module.exports.createServer = function(connection) {
     var server = new Hapi.Server()
