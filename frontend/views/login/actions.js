@@ -1,6 +1,5 @@
 import { pushState } from 'redux-router'
 import { loggedIn } from '../app/actions'
-import api  from '../../services/api'
 
 export function loginRequest() {
     return {
@@ -47,23 +46,27 @@ export function login(user) {
             return
         }
 
-        api.post(dispatch, '/api/users/login', user)
-        .then(result => {
-            dispatch(loggedIn(result))
-            dispatch(pushState(null, '/'))
-        })
-        .catch(error => {
-            const validationErrors = [
-                {
-                    path: 'username',
-                    message: 'Incorrect username'
-                },
-                {
-                    path: 'password',
-                    message: '...or password'
-                }
-            ]
-            dispatch(loginFailure(validationErrors))
+        dispatch({
+            type: 'API_POST',
+            uri: '/api/users/login',
+            payload: user,
+            onSuccess: (dispatch, result) => {
+                dispatch(loggedIn(result))
+                dispatch(pushState(null, '/'))
+            },
+            onError: (dispatch, error) => {
+                const validationErrors = [
+                    {
+                        path: 'username',
+                        message: 'Incorrect username'
+                    },
+                    {
+                        path: 'password',
+                        message: '...or password'
+                    }
+                ]
+                dispatch(loginFailure(validationErrors))
+            }
         })
     }
 }

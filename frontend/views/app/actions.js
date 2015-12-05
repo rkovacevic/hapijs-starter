@@ -1,5 +1,4 @@
 import { pushState } from 'redux-router'
-import api  from '../../services/api'
 
 export function loadingUserData() {
     return {
@@ -38,12 +37,15 @@ export function loadUserData() {
     return function(dispatch) {
         dispatch(loadingUserData())
 
-        api.get(dispatch, '/api/users/me')
-        .then(result => {
-            dispatch(userDataLoaded(result))
-        })
-        .catch(error => {
-            dispatch(userDataLoadingFailed())
+        dispatch({
+            type: 'API_GET',
+            uri: '/api/users/me',
+            onSuccess: (dispatch, result) => {
+                dispatch(userDataLoaded(result))
+            },
+            onError: (dispatch, error) => {
+                dispatch(userDataLoadingFailed())
+            }
         })
     }
 }
@@ -51,13 +53,16 @@ export function loadUserData() {
 export function logout() {
 
     return function(dispatch) {
-        api.get(dispatch, '/api/users/logout')
-        .then(result => {
-            dispatch(loggedOut())
-        })
-        .catch(error => {
-            // TODO handle this better
-            dispatch(loggedOut())
+        dispatch({
+            type: 'API_GET',
+            uri: '/api/users/logout',
+            onSuccess: (dispatch, result) => {
+                dispatch(loggedOut())
+            },
+            onError: (dispatch, error) => {
+                // TODO handle this better
+                dispatch(loggedOut())
+            }
         })
     }
 }

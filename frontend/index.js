@@ -10,6 +10,7 @@ import createLogger from 'redux-logger'
 import {polyfill} from 'es6-promise'
 polyfill()
 
+import api from './middleware/api'
 import reducers from './reducers'
 import routes from './routes'
 
@@ -18,7 +19,7 @@ let initialState = {
 }
 
 const store = compose(
-    applyMiddleware(thunk, createLogger()),
+    applyMiddleware(thunk, api, createLogger()),
     reduxReactRouter({
         routes,
         createHistory

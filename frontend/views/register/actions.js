@@ -1,5 +1,4 @@
 import { pushState } from 'redux-router'
-import api  from '../../services/api'
 import { loggedIn } from '../app/actions'
 
 export function registrationRequest() {
@@ -63,14 +62,18 @@ export function registerUser(user) {
             return
         }
 
-        api.post(dispatch, '/api/users', user)
-        .then(result => {
-            dispatch(registrationSuccess(result))
-            dispatch(loggedIn(result))
-            dispatch(pushState(null, '/'))
-        })
-        .catch(error => {
-            dispatch(registrationFailure(error.validationErrors))
+        dispatch({
+            type: 'API_POST',
+            uri: '/api/users',
+            payload: user,
+            onSuccess: (dispatch, result) => {
+                dispatch(registrationSuccess(result))
+                dispatch(loggedIn(result))
+                dispatch(pushState(null, '/'))
+            },
+            onError: (dispatch, result) => {
+                dispatch(registrationFailure(error.validationErrors))
+            }
         })
     }
 }
