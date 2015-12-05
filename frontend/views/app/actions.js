@@ -58,10 +58,12 @@ export function logout() {
             uri: '/api/users/logout',
             onSuccess: (dispatch, result) => {
                 dispatch(loggedOut())
+                dispatch(pushState(null, '/'))
             },
             onError: (dispatch, error) => {
                 // TODO handle this better
                 dispatch(loggedOut())
+                dispatch(pushState(null, '/'))
             }
         })
     }

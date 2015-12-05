@@ -10,9 +10,7 @@ export function registrationRequest() {
 export function registrationSuccess(user) {
     return {
         type: 'REGISTER_SUCCESS',
-        payload: {
-            user: user
-        }
+        payload: user
     }
 }
 
@@ -71,7 +69,7 @@ export function registerUser(user) {
                 dispatch(loggedIn(result))
                 dispatch(pushState(null, '/'))
             },
-            onError: (dispatch, result) => {
+            onError: (dispatch, error) => {
                 dispatch(registrationFailure(error.validationErrors))
             }
         })
