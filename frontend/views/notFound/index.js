@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-class NotFound extends React.Component {
+export class NotFound extends React.Component {
 
     render() {
         return (

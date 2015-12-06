@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { pushState } from 'redux-router'
 
-class ServerError extends React.Component {
+export class ServerError extends React.Component {
 
     constructor(props) {
         super(props)

@@ -1,23 +1,19 @@
 import {Home} from '.'
-import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import {shallowRender} from '../../utils/testUtils'
 import {expect} from 'chai'
+import {Jumbotron} from 'react-bootstrap'
+import {findWithType, findAllWithType} from 'react-shallow-testutils'
 
 describe('frontend home view', () => {
 
     it('renders jumbotron when not logged in', () => {
-        const shallowRenderer = TestUtils.createRenderer()
-        shallowRenderer.render(React.createElement(Home, { className: 'MyComponent' }))
-        const component = shallowRenderer.getRenderOutput()
-        console.dir(component.props.children.type)
-        expect(component.props.children.type.displayName).to.equal('Jumbotron')
+        const component = shallowRender(Home, { className: 'MyComponent' })
+        expect(findWithType(component, Jumbotron)).to.exist
     })
 
     it('renders welcome when logged in', () => {
-        const shallowRenderer = TestUtils.createRenderer()
-        shallowRenderer.render(React.createElement(Home, { className: 'MyComponent', user: { username: 'test' } }))
-        const component = shallowRenderer.getRenderOutput()
-        console.dir(component)
-        expect(component.props.children.props.children.type).to.equal('h1')
+        const component = shallowRender(Home, { className: 'MyComponent', user: { username: 'test' } })
+        expect(findWithType(component, 'h1')).to.exist
+        expect(findAllWithType(component, Jumbotron).length).to.equal(0)
     })
 })
