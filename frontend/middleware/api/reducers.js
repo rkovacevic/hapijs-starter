@@ -1,5 +1,8 @@
 const initialState = {
-    error: undefined
+    error: {
+        error: undefined,
+        message: undefined
+    }
 }
 
 const reducers = {

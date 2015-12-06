@@ -4,7 +4,10 @@ import {expect} from 'chai'
 describe('frontend reducers reducers', () => {
     it('has correct initialState', () => {
         expect(reducers.initialState).to.deep.equal({
-            error: undefined
+            error: {
+                error: undefined,
+                message: undefined
+            }
         })
     })
 

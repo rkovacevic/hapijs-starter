@@ -30,7 +30,7 @@ class App extends React.Component {
                     <p>Loading...</p>
                 </div>
                 <div style={{display: this.props.loadingUserData ? 'none' : 'block'}}>
-                    <Navbar inverse>
+                    <Navbar>
                         <Navbar.Header>
                             <Navbar.Brand>
                                 <Link to="/">React-Bootstrap</Link>

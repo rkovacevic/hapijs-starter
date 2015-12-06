@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 
-export default class About extends React.Component {
+class About extends React.Component {
 
     render() {
         return (
@@ -12,3 +12,5 @@ export default class About extends React.Component {
         )
     }
 }
+
+export default About

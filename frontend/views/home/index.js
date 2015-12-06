@@ -3,7 +3,7 @@ import { Jumbotron, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import {connect} from 'react-redux'
 
-class Home extends React.Component {
+export class Home extends React.Component {
 
     render() {
 

@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import { pushState } from 'redux-router'
 
-class NotFound extends React.Component {
+class ServerError extends React.Component {
+
+    constructor(props) {
+        super(props)
+        if (props.error.error === undefined) {
+            props.dispatch(pushState(undefined, '/'))
+        }
+    }
 
     render() {
         return (
@@ -17,4 +25,4 @@ const mapStateToProps = (state) => ({
     error: state.api.error
 })
 
-export default connect(mapStateToProps)(NotFound)
+export default connect(mapStateToProps)(ServerError)
