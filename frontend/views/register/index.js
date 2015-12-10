@@ -2,8 +2,9 @@ import React from 'react'
 import {Input, ButtonInput} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import {registerUser} from './actions'
+import {bindActionCreators} from 'redux'
 
-class Register extends React.Component {
+export class Register extends React.Component {
 
     constructor(props) {
         super(props)
@@ -12,11 +13,11 @@ class Register extends React.Component {
 
     onSubmit(e) {
         e.preventDefault()
-        this.props.dispatch(registerUser({
+        this.props.registerUser({
             username: this.refs.username.getValue(),
             password: this.refs.password.getValue(),
             repeatPassword: this.refs.repeatPassword.getValue()
-        }))
+        })
     }
 
     render() {
@@ -33,11 +34,33 @@ class Register extends React.Component {
         return (
             <div>
                 <h1>Register new user</h1>
-                <form onSubmit={this.onSubmit}>
-                    <Input ref="username" type="text" label="Username" bsStyle={styles.username} help={helps.username} placeholder="Enter username" zindex={1} />
-                    <Input ref="password" type="password" label="Password" placeholder="Enter password" bsStyle={styles.password} help={helps.password} zindex={2} />
-                    <Input ref="repeatPassword" type="password" label="Reapeat password" placeholder="Enter the same password again" bsStyle={styles.repeatPassword} help={helps.repeatPassword} zindex={3} />
-                    <ButtonInput type="submit" value="Submit" bsSize="large" bsStyle="primary" zindex={4} />
+                <form ref="form" onSubmit={this.onSubmit}>
+                    <Input
+                        ref="username"
+                        type="text"
+                        label="Username"
+                        bsStyle={styles.username}
+                        help={helps.username}
+                        placeholder="Enter username" />
+                    <Input
+                        ref="password"
+                        type="password"
+                        label="Password"
+                        placeholder="Enter password"
+                        bsStyle={styles.password}
+                        help={helps.password} />
+                    <Input
+                        ref="repeatPassword"
+                        type="password"
+                        label="Reapeat password"
+                        placeholder="Enter the same password again"
+                        bsStyle={styles.repeatPassword}
+                        help={helps.repeatPassword} />
+                    <ButtonInput
+                        type="submit"
+                        value="Submit"
+                        bsSize="large"
+                        bsStyle="primary" />
                 </form>
             </div>
         )
@@ -48,4 +71,8 @@ const mapStateToProps = (state) => ({
     validationErrors: state.register.validationErrors
 })
 
-export default connect(mapStateToProps)(Register)
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({registerUser}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)
