@@ -1,10 +1,11 @@
 import React from 'react'
 import {Input, ButtonInput} from 'react-bootstrap'
 import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import {login} from './actions'
 
-class Login extends React.Component {
-    
+export class Login extends React.Component {
+
     constructor(props) {
         super(props)
         this.onSubmit = this.onSubmit.bind(this)
@@ -12,10 +13,10 @@ class Login extends React.Component {
 
     onSubmit(e) {
         e.preventDefault()
-        this.props.dispatch(login({
+        this.props.login({
             username: this.refs.username.getValue(),
             password: this.refs.password.getValue()
-        }))
+        })
     }
 
     render() {
@@ -32,18 +33,37 @@ class Login extends React.Component {
         return (
             <div>
                 <h1>Login</h1>
-                <form onSubmit={this.onSubmit}>
-                    <Input ref="username" type="text" label="Username" bsStyle={styles.username} help={helps.username} placeholder="Enter username" zindex={1} />
-                    <Input ref="password" type="password" label="Password" placeholder="Enter password" bsStyle={styles.password} help={helps.password} zindex={2} />
-                    <ButtonInput type="submit" value="Login" bsSize="large" bsStyle="primary" zindex={4} />
+                <form ref="form" onSubmit={this.onSubmit}>
+                    <Input
+                        ref="username"
+                        type="text"
+                        label="Username"
+                        bsStyle={styles.username}
+                        help={helps.username}
+                        placeholder="Enter username" />
+                    <Input
+                        ref="password"
+                        type="password" label="Password"
+                        placeholder="Enter password"
+                        bsStyle={styles.password}
+                        help={helps.password} />
+                    <ButtonInput
+                        type="submit"
+                        value="Login"
+                        bsSize="large"
+                        bsStyle="primary" />
                 </form>
             </div>
         )
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     validationErrors: state.auth.validationErrors
 })
 
-export default connect(mapStateToProps)(Login)
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({login}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
