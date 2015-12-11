@@ -1,26 +1,16 @@
-import React, { Component } from 'react'
-import 'bootstrap-webpack'
-import { Navbar, NavBrand, NavItem, NavDropdown, Nav, MenuItem, Panel, Button, Input } from 'react-bootstrap'
-import { Link } from 'react-router'
-import { LinkContainer } from 'react-router-bootstrap'
+import React, {Component} from 'react'
+import {Navbar, NavBrand, NavItem, NavDropdown, Nav, MenuItem, Panel, Button, Input} from 'react-bootstrap'
+import {Link} from 'react-router'
+import {LinkContainer} from 'react-router-bootstrap'
 import {connect} from 'react-redux'
-import './App.css'
-import { loadUserData, logout } from './actions'
+import {bindActionCreators} from 'redux'
+import {loadUserData, logout} from './actions'
 
 
-class App extends React.Component {
-
-    constructor(props) {
-        super(props)
-        this.logout = this.logout.bind(this)
-    }
+export class App extends React.Component {
 
     componentDidMount() {
-        this.props.dispatch(loadUserData())
-    }
-
-    logout() {
-        this.props.dispatch(logout())
+        this.props.loadUserData()
     }
 
     render() {
@@ -46,7 +36,7 @@ class App extends React.Component {
                                     </LinkContainer>
                                     :
                                     <NavDropdown title={this.props.user.username} id="user-dropdown">
-                                        <MenuItem onClick={this.logout}>Logout</MenuItem>
+                                        <MenuItem onClick={this.props.logout}>Logout</MenuItem>
                                     </NavDropdown>
                                 }
                             </Nav>
@@ -74,4 +64,8 @@ const mapStateToProps = (state) => ({
     loadingUserData: state.app.loadingUserData
 })
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({loadUserData, logout}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

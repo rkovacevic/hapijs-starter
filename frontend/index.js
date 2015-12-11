@@ -6,6 +6,7 @@ import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
 import {Provider} from 'react-redux'
 import {reduxReactRouter, routerStateReducer, ReduxRouter} from 'redux-router'
 import createLogger from 'redux-logger'
+import 'bootstrap-webpack'
 
 import {polyfill} from 'es6-promise'
 polyfill()
