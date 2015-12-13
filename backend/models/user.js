@@ -4,12 +4,12 @@ var bcrypt = require('bcrypt')
 module.exports = function(sequelize, DataTypes) {
     var User = sequelize.define('User', {
         id: {
-            type: Sequelize.BIGINT,
+            type: DataTypes.BIGINT,
             primaryKey: true,
             autoIncrement: true
         },
         username: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             unique: true,
             validate: {
@@ -17,11 +17,11 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         password: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         scope: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         }
     }, {
@@ -33,6 +33,9 @@ module.exports = function(sequelize, DataTypes) {
                         return done(encrypted)
                     })
                 })
+            },
+            associate: function(models) {
+                User.hasMany(models.Todo)
             }
         },
         instanceMethods: {
