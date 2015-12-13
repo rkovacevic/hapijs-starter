@@ -6,6 +6,7 @@ module.exports = [{
     method: 'GET',
     path: '/api/users/me',
     config: {
+        tags: ['api'],
         handler: function(request, reply) {
             reply(request.auth.credentials)
         }
@@ -14,6 +15,7 @@ module.exports = [{
     method: 'POST',
     path: '/api/users',
     config: {
+        tags: ['api'],
         auth: false,
         validate: {
             payload: {
@@ -43,6 +45,7 @@ module.exports = [{
     method: 'POST',
     path: '/api/users/login',
     config: {
+        tags: ['api'],
         auth: false,
         validate: {
             payload: {
@@ -76,6 +79,7 @@ module.exports = [{
     method: 'GET',
     path: '/api/users/logout',
     config: {
+        tags: ['api'],
         auth: false,
         handler: function(request, reply) {
             request.auth.session.clear()

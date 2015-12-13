@@ -7,6 +7,7 @@ module.exports = [{
     method: 'GET',
     path: '/api/users/{userId}/todos',
     config: {
+        tags: ['api'],
         validate: {
             params: {
                 userId: Joi.number().integer().required()
@@ -26,6 +27,7 @@ module.exports = [{
     method: 'POST',
     path: '/api/users/{userId}/todos',
     config: {
+        tags: ['api'],
         validate: {
             params: {
                 userId: Joi.number().integer().required()
@@ -47,6 +49,7 @@ module.exports = [{
     method: 'PUT',
     path: '/api/users/{userId}/todos/{todoId}',
     config: {
+        tags: ['api'],
         validate: {
             params: {
                 userId: Joi.number().integer().required(),
@@ -75,6 +78,7 @@ module.exports = [{
     method: 'DELETE',
     path: '/api/users/{userId}/todos/{todoId}',
     config: {
+        tags: ['api'],
         validate: {
             params: {
                 userId: Joi.number().integer().required(),

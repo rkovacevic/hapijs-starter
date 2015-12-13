@@ -8,6 +8,8 @@ var authCookie = require('hapi-auth-cookie')
 var Promise = require('bluebird')
 var injectThen = require('inject-then')
 var Boom = require('Boom')
+var HapiSwagger = require('hapi-swagger')
+var Vision = require('vision')
 
 
 var goodPlugin = {
@@ -25,7 +27,9 @@ var goodPlugin = {
 
 var plugins = [
     Inert,
-    authCookie
+    authCookie,
+    Vision,
+    HapiSwagger
 ]
 
 if (process.env.NODE_ENV !== 'test') {

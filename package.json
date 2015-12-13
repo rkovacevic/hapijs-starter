@@ -52,6 +52,7 @@
     "good-console": "^5.1.0",
     "hapi": "^11.0.3",
     "hapi-auth-cookie": "^3.1.0",
+    "hapi-swagger": "^2.2.4",
     "history": "^1.13.0",
     "inert": "^3.2.0",
     "joi": "^7.0.1",
@@ -71,6 +72,7 @@
     "redux-thunk": "^1.0.0",
     "sequelize": "^3.13.0",
     "sqlite3": "^3.1.1",
+    "vision": "^4.0.1",
     "whatwg-fetch": "^0.10.1"
   },
   "devDependencies": {
