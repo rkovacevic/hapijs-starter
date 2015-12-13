@@ -54,6 +54,7 @@
     "hapi-auth-cookie": "^3.1.0",
     "history": "^1.13.0",
     "inert": "^3.2.0",
+    "joi": "^7.0.1",
     "jquery": "^2.1.4",
     "less": "^2.5.3",
     "lodash": "^3.10.1",

@@ -1,10 +1,17 @@
 var models = require('../models')
 var Boom = require('Boom')
+var Joi = require('Joi')
+
 
 module.exports = [{
     method: 'GET',
     path: '/api/users/{userId}/todos',
     config: {
+        validate: {
+            params: {
+                userId: Joi.number().integer().required()
+            }
+        },
         handler: function(request, reply) {
             models.Todo.findAll({
                 where: {
@@ -19,6 +26,15 @@ module.exports = [{
     method: 'POST',
     path: '/api/users/{userId}/todos',
     config: {
+        validate: {
+            params: {
+                userId: Joi.number().integer().required()
+            },
+            payload: {
+                text: Joi.string().min(1).max(1000).required(),
+                done: Joi.boolean()
+            }
+        },
         handler: function(request, reply) {
             var todo = request.payload
             todo.UserId = parseInt(request.params.userId, 10)
@@ -31,6 +47,16 @@ module.exports = [{
     method: 'PUT',
     path: '/api/users/{userId}/todos/{todoId}',
     config: {
+        validate: {
+            params: {
+                userId: Joi.number().integer().required(),
+                todoId: Joi.number().integer().required()
+            },
+            payload: {
+                text: Joi.string().min(1).max(1000).required(),
+                done: Joi.boolean()
+            }
+        },
         handler: function(request, reply) {
             models.Todo.update(
                 request.payload,
@@ -49,6 +75,12 @@ module.exports = [{
     method: 'DELETE',
     path: '/api/users/{userId}/todos/{todoId}',
     config: {
+        validate: {
+            params: {
+                userId: Joi.number().integer().required(),
+                todoId: Joi.number().integer().required()
+            }
+        },
         handler: function(request, reply) {
             models.Todo.destroy({
                 where: {

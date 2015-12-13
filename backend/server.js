@@ -7,6 +7,8 @@ var routes = require('./routes')
 var authCookie = require('hapi-auth-cookie')
 var Promise = require('bluebird')
 var injectThen = require('inject-then')
+var Boom = require('Boom')
+
 
 var goodPlugin = {
     register: Good,
@@ -33,7 +35,23 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 module.exports.createServer = function(connection) {
-    var server = new Hapi.Server()
+    var server = new Hapi.Server({
+        connections: {
+            routes: {
+                validate: {
+                    failAction: (request, reply, source, error) => {
+                        if (source === 'payload') {
+                            error.output.statusCode = 422
+                            error.output.payload = {
+                                validationErrors: error.data.details
+                            }
+                        }
+                        reply(error)
+                    }
+                }
+            }
+        }
+    })
 
     server.connection(connection)
 

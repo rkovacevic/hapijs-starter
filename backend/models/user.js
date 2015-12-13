@@ -1,4 +1,3 @@
-var Sequelize = require('sequelize')
 var bcrypt = require('bcrypt')
 
 module.exports = function(sequelize, DataTypes) {
@@ -13,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             unique: true,
             validate: {
-                len: [5, 100]
+                len: [5, 20]
             }
         },
         password: {
