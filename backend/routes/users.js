@@ -20,7 +20,8 @@ module.exports = [{
         validate: {
             payload: {
                 username: Joi.string().min(5).max(20).required(),
-                password: Joi.string().min(5).max(100).required()
+                password: Joi.string().min(5).max(100).required(),
+                repeatPassword: Joi.string().min(5).max(100).required()
             }
         },
         handler: function(request, reply) {

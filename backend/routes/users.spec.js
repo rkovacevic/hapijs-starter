@@ -52,7 +52,8 @@ describe('Users', () => {
             url: '/api/users',
             payload: {
                 username: 'homer',
-                password: 'beavis'
+                password: 'beavis',
+                repeatPassword: 'beavis'
             }
         }).then((registerResponse) => {
             expect(registerResponse.statusCode).to.equal(200)
