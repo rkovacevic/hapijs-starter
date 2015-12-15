@@ -17,7 +17,8 @@ module.exports = [{
             models.Todo.findAll({
                 where: {
                     userId: request.params.userId
-                }
+                },
+                raw: true
             })
             .then(reply)
             .catch(reply)
