@@ -73,12 +73,12 @@ describe('Todos', () => {
     })
 
     it('PUTs todos', (done) => {
+        todo.text = 'Do something else'
+
         return server.injectThen({
             method: 'PUT',
             url: `/api/users/${user.get('id')}/todos/${todo.get('id')}`,
-            payload: {
-                text: 'Do something else'
-            },
+            payload: todo,
             credentials: user
         }).then((response) => {
             expect(response.statusCode).to.equal(200)

@@ -20,6 +20,19 @@ export function addTodoFailure(validationErrors) {
     }
 }
 
+export function toggleTodoDoneSuccess(todo) {
+    return {
+        type: 'TOGGLE_TODO_DONE_SUCCESS',
+        payload: todo
+    }
+}
+
+export function toggleTodoDoneFailure() {
+    return {
+        type: 'TOGGLE_TODO_DONE_FAILURE'
+    }
+}
+
 export function getTodosRequest() {
     return {
         type: 'GET_TODOS_REQUEST',
@@ -66,11 +79,31 @@ export function addTodo(userId, todo) {
     }
 }
 
+export function toggleTodoDone(userId, todo) {
+
+    return function(dispatch) {
+
+        todo.done = todo.done ? false : true
+
+        dispatch({
+            type: 'API_PUT',
+            uri: `/api/users/${userId}/todos/${todo.id}`,
+            payload: todo,
+            onSuccess: (dispatch, result) => {
+                dispatch(toggleTodoDoneSuccess(result))
+            },
+            onError: (dispatch, error) => {
+                dispatch(toggleTodoDoneFailure())
+            }
+        })
+    }
+}
+
 export function getTodos(userId) {
 
     return function(dispatch) {
         dispatch(getTodosRequest())
-        
+
         dispatch({
             type: 'API_GET',
             uri: `/api/users/${userId}/todos`,

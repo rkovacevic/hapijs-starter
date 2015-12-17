@@ -15,6 +15,15 @@ const reducers = {
             validationErrors: payload
         })
     },
+    'TOGGLE_TODO_DONE_SUCCESS': (state, payload) => {
+        const todos = state.todos.map(todo => {
+            if (todo.id === payload.id) todo.done = payload.done
+            return todo
+        })
+        return Object.assign({}, state, {
+            todos: todos
+        })
+    },
     'GET_TODOS_REQUEST': (state, payload) => {
         return Object.assign({}, state, {
             todos: undefined

@@ -58,7 +58,11 @@ module.exports = [{
             },
             payload: {
                 text: Joi.string().min(1).max(1000).required(),
-                done: Joi.boolean()
+                done: Joi.boolean(),
+                id: Joi.number().required(),
+                createdAt: Joi.date().required(),
+                updatedAt: Joi.date().required(),
+                UserId: Joi.number().required()
             }
         },
         handler: function(request, reply) {
@@ -66,7 +70,7 @@ module.exports = [{
                 request.payload,
                 {
                     where: {
-                        userId: request.params.userId,
+                        UserId: request.params.userId,
                         id: request.params.todoId
                     }
                 }

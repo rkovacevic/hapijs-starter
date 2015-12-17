@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Jumbotron, Button, Input, ButtonInput, ListGroupItem, ListGroup, Glyphicon } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import {addTodo, getTodos} from './actions'
+import {addTodo, getTodos, toggleTodoDone} from './actions'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
@@ -28,8 +28,9 @@ export class Todos extends React.Component {
         })
     }
 
-    onTodoClick(todo) {
-        console.dir(todo)
+    onTodoClick(todo, event) {
+        this.props.toggleTodoDone(this.props.user.id, todo)
+        event.target.blur()
     }
 
     render() {
@@ -43,6 +44,14 @@ export class Todos extends React.Component {
             })
         }
 
+        let todos = undefined
+
+        if (this.props.todos !== undefined) {
+            todos = this.props.todos.sort((a, b) => {
+                return a.done ? 1 : -1
+            })
+        }
+
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
@@ -53,14 +62,14 @@ export class Todos extends React.Component {
                         bsStyle={styles.text}
                         help={helps.text} />
                 </form>
-                {this.props.todos === undefined ?
+                {todos === undefined ?
                     <p>Loading...</p>
                     :
-                    this.props.todos.length === 0 ?
+                    todos.length === 0 ?
                         <p>You have nothing to do.</p>
                         :
                         <ListGroup>
-                            {this.props.todos.map(todo => {
+                            {todos.map(todo => {
                                 return (
                                     <ListGroupItem key={todo.id} onClick={this.onTodoClick.bind(undefined, todo)} bsStyle={todo.done ? 'success' : 'info'}>
                                         {todo.done ?
@@ -85,7 +94,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => {
-    return bindActionCreators({addTodo, getTodos}, dispatch)
+    return bindActionCreators({addTodo, getTodos, toggleTodoDone}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Todos)
