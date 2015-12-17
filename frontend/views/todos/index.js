@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Jumbotron, Button, Input, ButtonInput, ListGroupItem, ListGroup, Glyphicon } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import {addTodo, getTodos, toggleTodoDone} from './actions'
+import Shuffle from 'react-shuffle'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
@@ -48,7 +49,8 @@ export class Todos extends React.Component {
 
         if (this.props.todos !== undefined) {
             todos = this.props.todos.sort((a, b) => {
-                return a.done ? 1 : -1
+                if (a.done != b.done) return a.done ? 1 : -1
+                return b.id - a.id
             })
         }
 
@@ -68,7 +70,9 @@ export class Todos extends React.Component {
                     todos.length === 0 ?
                         <p>You have nothing to do.</p>
                         :
+
                         <ListGroup>
+                            <Shuffle>
                             {todos.map(todo => {
                                 return (
                                     <ListGroupItem key={todo.id} onClick={this.onTodoClick.bind(undefined, todo)} bsStyle={todo.done ? 'success' : 'info'}>
@@ -79,6 +83,7 @@ export class Todos extends React.Component {
                                     </ListGroupItem>
                                 )
                             })}
+                            </Shuffle>
                         </ListGroup>
 
                 }
