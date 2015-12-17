@@ -31,6 +31,7 @@ module.exports = [{
                 user.password = encrypted
                 models.User.create(user)
                 .then(user => {
+                    request.auth.session.set(user)
                     delete user.dataValues.password
                     reply(user)
                 })

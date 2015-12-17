@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Jumbotron, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import {connect} from 'react-redux'
+import Todos from '../todos'
 
 export class Home extends React.Component {
 
@@ -21,7 +22,7 @@ export class Home extends React.Component {
                 </Jumbotron>
                 :
                 <div>
-                    <h1>Welcome, {this.props.user.username}</h1>
+                    <Todos></Todos>
                 </div>
                 }
             </div>
