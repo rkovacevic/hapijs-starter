@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Todo = sequelize.define("Todo", {
+    var Todo = sequelize.define('Todo', {
         text: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
         classMethods: {
             associate: function(models) {
                 Todo.belongsTo(models.User, {
-                    onDelete: "CASCADE",
+                    onDelete: 'CASCADE',
                     foreignKey: {
                         allowNull: false
                     }
