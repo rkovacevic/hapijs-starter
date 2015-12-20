@@ -31,7 +31,6 @@ export class Todos extends React.Component {
 
     onTodoClick(todo, event) {
         this.props.toggleTodoDone(this.props.user.id, todo)
-        event.target.blur()
     }
 
     render() {
@@ -70,7 +69,6 @@ export class Todos extends React.Component {
                     todos.length === 0 ?
                         <p>You have nothing to do.</p>
                         :
-
                         <ListGroup>
                             <Shuffle>
                             {todos.map(todo => {
@@ -85,7 +83,6 @@ export class Todos extends React.Component {
                             })}
                             </Shuffle>
                         </ListGroup>
-
                 }
             </div>
         )
