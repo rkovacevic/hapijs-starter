@@ -86,7 +86,19 @@ module.exports.createServer = function(connection) {
             isHttpOnly: true,
             path: '/api',
             isSecure: false,
-            ttl: 24 * 60 * 60 * 1000 // Set session to 1 day
+            ttl: 24 * 60 * 60 * 1000, // Set session to 1 day
+            validateFunc: function(request, sessionUser, callback) {
+                // If 'userId' param is present in the route, only allow
+                // access if it is equal to the logged in user. I.e. user can't
+                // access assets for other users.
+                if (sessionUser.scope !== 'admin' &&
+                    request.params.userId !== undefined &&
+                    sessionUser.id !== parseInt(request.params.userId, 10)) {
+                    callback('Unauthorized access', false)
+                } else {
+                    callback(undefined, true)
+                }
+            }
         })
 
         server.auth.default({

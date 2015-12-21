@@ -8,6 +8,7 @@ class About extends React.Component {
             <div>
                 <h1>About</h1>
                 <p>Created by Robert Kovačević</p>
+                <Button href="/documentation" target="_blank" bsStyle="info" bsSize="large">API documentation</Button>
             </div>
         )
     }
