@@ -55,7 +55,7 @@ export class Todos extends React.Component {
 
         return (
             <div>
-                <form onSubmit={this.onSubmit}>
+                <form ref="form" onSubmit={this.onSubmit}>
                     <Input
                         ref="todo"
                         type="text"
