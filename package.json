@@ -9,7 +9,8 @@
     "start": "node backend/index.js",
     "build": "webpack -p --progress --colors",
     "dev": "webpack --progress --colors --watch & nodemon",
-    "lint": "eslint --ext .js,.jsx frontend/**/** backend/**/**"
+    "lint": "eslint --ext .js,.jsx frontend/**/** backend/**/**",
+    "postinstall": "npm run build"
   },
   "database": {
     "development": {
@@ -26,6 +27,10 @@
       "logging": false
     }
   },
+  "engines": {
+    "node": "4.1.1"
+  },
+  "cacheDirectories": ["node_modules"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rkovacevic/hapijs-starter.git"
