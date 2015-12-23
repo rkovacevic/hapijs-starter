@@ -107,6 +107,6 @@
     "nodemon": "^1.8.0",
     "react-addons-test-utils": "^0.14.2",
     "react-shallow-testutils": "^0.7.1",
-    "sinon": "^1.17.2",
+    "sinon": "^1.17.2"
   }
 }
