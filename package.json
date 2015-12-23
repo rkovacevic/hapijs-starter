@@ -79,7 +79,8 @@
     "sequelize": "^3.13.0",
     "sqlite3": "^3.1.1",
     "vision": "^4.0.1",
-    "whatwg-fetch": "^0.10.1"
+    "whatwg-fetch": "^0.10.1",
+    "inject-then": "^2.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.0.20",
@@ -95,7 +96,6 @@
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
     "imports-loader": "^0.6.5",
-    "inject-then": "^2.0.3",
     "jsdom": "^7.2.0",
     "less-loader": "^2.2.1",
     "mocha": "^2.3.4",
