@@ -1,6 +1,6 @@
 var models = require('../models')
-var Boom = require('Boom')
-var Joi = require('Joi')
+var Boom = require('boom')
+var Joi = require('joi')
 
 module.exports = [{
     method: 'GET',

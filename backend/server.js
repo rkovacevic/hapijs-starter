@@ -7,7 +7,7 @@ var routes = require('./routes')
 var authCookie = require('hapi-auth-cookie')
 var Promise = require('bluebird')
 var injectThen = require('inject-then')
-var Boom = require('Boom')
+var Boom = require('boom')
 var HapiSwagger = require('hapi-swagger')
 var Vision = require('vision')
 
