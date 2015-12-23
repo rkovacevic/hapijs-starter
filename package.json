@@ -7,7 +7,7 @@
     "test": "NODE_ENV=test mocha --compilers js:babel-core/register ./backend/**/*.spec.js ./frontend/**/*.spec.js",
     "test:watch": "npm test -- --watch --reporter min",
     "start": "node backend/index.js",
-    "build": "webpack -p --progress --colors",
+    "build": "webpack -p",
     "dev": "webpack --progress --colors --watch & nodemon",
     "lint": "eslint --ext .js,.jsx frontend/**/** backend/**/**",
     "postinstall": "npm run build"
