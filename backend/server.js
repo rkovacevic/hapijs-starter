@@ -93,7 +93,7 @@ module.exports.createServer = function(connection) {
                 // access assets for other users.
                 if (sessionUser.scope !== 'admin' &&
                     request.params.userId !== undefined &&
-                    sessionUser.id !== parseInt(request.params.userId, 10)) {
+                    parseInt(sessionUser.id, 10) !== parseInt(request.params.userId, 10)) {
                     callback('Unauthorized access', false)
                 } else {
                     callback(undefined, true)
