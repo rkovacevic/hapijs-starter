@@ -3013,6 +3013,11 @@
         }
       }
     },
+    "less-loader": {
+      "version": "2.2.2",
+      "from": "less-loader@>=2.2.1 <3.0.0",
+      "resolved": "http://registry.npmjs.org/less-loader/-/less-loader-2.2.2.tgz"
+    },
     "leven": {
       "version": "1.0.2",
       "from": "leven@>=1.0.2 <2.0.0",
@@ -3564,7 +3569,7 @@
     "pause-stream": {
       "version": "0.0.11",
       "from": "pause-stream@0.0.11",
-      "resolved": "http://registry.nodejitsu.com/pause-stream/-/pause-stream-0.0.11.tgz"
+      "resolved": "http://registry.npmjs.eu/pause-stream/-/pause-stream-0.0.11.tgz"
     },
     "pbkdf2-compat": {
       "version": "2.0.1",
