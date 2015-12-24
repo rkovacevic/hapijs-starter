@@ -19,7 +19,7 @@ var goodPlugin = {
             reporter: require('good-console'),
             events: {
                 response: '*',
-                log: 'error'
+                log: '*'
             }
         }]
     }
@@ -37,6 +37,12 @@ if (process.env.NODE_ENV !== 'test') {
 } else {
     plugins.push(injectThen)
 }
+
+process.on('uncaughtException', function (err) {
+    console.error((new Date).toUTCString() + ' uncaughtException:', err.message)
+    console.error(err.stack)
+    process.exit(1)
+})
 
 module.exports.createServer = function(connection) {
     var server = new Hapi.Server({
