@@ -57,7 +57,7 @@
     "hapi": "^11.0.3",
     "hapi-auth-cookie": "^3.1.0",
     "hapi-swagger": "^2.2.4",
-    "history": "1.13.0",
+    "history": "^1.17.0",
     "inert": "^3.2.0",
     "joi": "^7.0.1",
     "jquery": "^2.1.4",
