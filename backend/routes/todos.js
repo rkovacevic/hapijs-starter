@@ -17,7 +17,7 @@ module.exports = [{
             console.log(1)
             models.Todo.findAll({
                 where: {
-                    userId: request.params.userId
+                    UserId: request.params.userId
                 },
                 raw: true
             })
@@ -97,7 +97,7 @@ module.exports = [{
         handler: function(request, reply) {
             models.Todo.destroy({
                 where: {
-                    userId: request.params.userId,
+                    UserId: request.params.userId,
                     id: request.params.todoId
                 }
             })
