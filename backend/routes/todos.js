@@ -14,6 +14,7 @@ module.exports = [{
             }
         },
         handler: function(request, reply) {
+            console.log(1)
             models.Todo.findAll({
                 where: {
                     userId: request.params.userId

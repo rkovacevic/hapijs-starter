@@ -97,6 +97,8 @@ module.exports.createServer = function(connection) {
                 // If 'userId' param is present in the route, only allow
                 // access if it is equal to the logged in user. I.e. user can't
                 // access assets for other users.
+                console.dir(sessionUser)
+                console.dir(request.params)
                 if (sessionUser.scope !== 'admin' &&
                     request.params.userId !== undefined &&
                     parseInt(sessionUser.id, 10) !== parseInt(request.params.userId, 10)) {
