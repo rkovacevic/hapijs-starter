@@ -14,7 +14,6 @@ module.exports = [{
             }
         },
         handler: function(request, reply) {
-            console.log(1)
             models.Todo.findAll({
                 where: {
                     UserId: request.params.userId
@@ -22,10 +21,7 @@ module.exports = [{
                 raw: true
             })
             .then(reply)
-            .catch((err) => {
-                console.dir(err)
-                reply(err)
-            })
+            .catch(reply)
         }
     }
 }, {
