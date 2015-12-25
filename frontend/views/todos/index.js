@@ -6,6 +6,8 @@ import Shuffle from 'react-shuffle'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
+import './index.css'
+
 export class Todos extends React.Component {
 
     constructor(props) {
