@@ -22,7 +22,10 @@ module.exports = [{
                 raw: true
             })
             .then(reply)
-            .catch(reply)
+            .catch((err) => {
+                console.dir(err)
+                reply(err)
+            })
         }
     }
 }, {
