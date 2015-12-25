@@ -3,13 +3,64 @@
 <head>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title>TODO App</title>
-</head>
-<body>
-    <div id='root'>
-    </div>
+    <style>
+    .spinner {
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -40%);
+        transform: translate(-50%, -40%);
+        margin: 100px auto 0;
+        width: 70px;
+        text-align: center;
+    }
 
-    <a href="https://github.com/rkovacevic/hapijs-starter"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+    .spinner > div {
+        width: 18px;
+        height: 18px;
+        background-color: #333;
 
-    <script src="/build/bundle.js"></script>
-</body>
-</html>
+        border-radius: 100%;
+        display: inline-block;
+        -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+        animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    }
+
+    .spinner .bounce1 {
+        -webkit-animation-delay: -0.32s;
+        animation-delay: -0.32s;
+    }
+
+    .spinner .bounce2 {
+        -webkit-animation-delay: -0.16s;
+        animation-delay: -0.16s;
+    }
+
+    @-webkit-keyframes sk-bouncedelay {
+        0%, 80%, 100% { -webkit-transform: scale(0) }
+        40% { -webkit-transform: scale(1.0) }
+    }
+
+    @keyframes sk-bouncedelay {
+        0%, 80%, 100% {
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            } 40% {
+                -webkit-transform: scale(1.0);
+                transform: scale(1.0);
+            }
+        }
+        </style>
+    </head>
+    <body>
+        <div id='root'>
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+
+        <script src="/build/bundle.js"></script>
+    </body>
+    </html>

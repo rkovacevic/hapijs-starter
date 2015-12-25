@@ -2,6 +2,7 @@ import React from 'react'
 import {Input, ButtonInput} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
+import {Link} from 'react-router'
 import {login} from './actions'
 
 export class Login extends React.Component {
@@ -53,6 +54,7 @@ export class Login extends React.Component {
                         bsSize="large"
                         bsStyle="primary" />
                 </form>
+                <Link to="/register">Create new account</Link>
             </div>
         )
     }
