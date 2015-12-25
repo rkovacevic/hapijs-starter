@@ -23,7 +23,7 @@ export class App extends React.Component {
                     <Navbar>
                         <Navbar.Header>
                             <Navbar.Brand>
-                                <Link to="/">React-Bootstrap</Link>
+                                <Link to="/">TODO App</Link>
                             </Navbar.Brand>
                             <Navbar.Toggle />
                         </Navbar.Header>
