@@ -14,19 +14,18 @@ export class Home extends React.Component {
                 <Jumbotron>
                     <h1>Hello, world!</h1>
                     <p>
-                        This is a simple TODO app demo, built with:
-                        <ul>
-                            <li>Node</li>
-                            <li>Hapi</li>
-                            <li>React</li>
-                            <li>Redux</li>
-                            <li>Sequelize</li>
-                            <li>ES6</li>
-                            <li>Babel</li>
-                            <li>Webpack</li>
-                            <li>Mocha + Chai + Sinon</li>
-                        </ul>
-                    </p>
+                        This is a simple TODO app demo, built with:</p>
+                    <ul>
+                        <li>Node</li>
+                        <li>Hapi</li>
+                        <li>React</li>
+                        <li>Redux</li>
+                        <li>Sequelize</li>
+                        <li>ES6</li>
+                        <li>Babel</li>
+                        <li>Webpack</li>
+                        <li>Mocha + Chai + Sinon</li>
+                    </ul>
                     <p>
                         <LinkContainer to="/register">
                             <Button bsStyle="primary" bsSize="large">Register</Button>
