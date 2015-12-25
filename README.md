@@ -10,6 +10,8 @@ This is a real world(-ish) example todo app, build with:
 * Babel
 * Mocha + Chai + Sinon
 
+### [Live demo](http://rkovacevic-todo.herokuapp.com/)
+
 Usage
 ----
 
