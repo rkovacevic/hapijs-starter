@@ -17,7 +17,11 @@ export class App extends React.Component {
         return (
             <div>
                 <div style={{display: this.props.loadingUserData ? 'block' : 'none'}}>
-                    <p>Loading...</p>
+                    <div class="spinner">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
                 </div>
                 <div style={{display: this.props.loadingUserData ? 'none' : 'block'}}>
                     <Navbar>

@@ -66,7 +66,11 @@ export class Todos extends React.Component {
                         help={helps.text} />
                 </form>
                 {todos === undefined ?
-                    <p>Loading...</p>
+                    <div className="spinner">
+                        <div className="bounce1"></div>
+                        <div className="bounce2"></div>
+                        <div className="bounce3"></div>
+                    </div>
                     :
                     todos.length === 0 ?
                         <p>You have nothing to do.</p>
