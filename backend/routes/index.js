@@ -38,6 +38,20 @@ routes.register = function(server) {
             }
         }
     })
+
+    server.route({
+        method: 'GET',
+        path: '/assets/{param*}',
+        config: {
+            auth: false,
+            handler: {
+                directory: {
+                    path: Path.join(__dirname, '..', '..', 'frontend', 'assets'),
+                    index: true
+                }
+            }
+        }
+    })
 }
 
 module.exports = routes
