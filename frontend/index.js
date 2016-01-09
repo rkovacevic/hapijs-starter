@@ -19,8 +19,12 @@ let initialState = {
     validationErrors: null
 }
 
+let middleware = [thunk, api]
+
+if (__DEV__) middleware.push(createLogger())
+
 const store = compose(
-    applyMiddleware(thunk, api, createLogger()),
+    applyMiddleware(...middleware),
     reduxReactRouter({
         routes,
         createHistory

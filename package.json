@@ -8,7 +8,7 @@
     "test:watch": "npm test -- --watch --reporter min",
     "start": "node backend/index.js",
     "build": "webpack -p",
-    "dev": "webpack --progress --colors --watch & nodemon",
+    "dev": "NODE_ENV=dev webpack --progress --colors --watch & nodemon",
     "lint": "eslint --ext .js,.jsx frontend/**/** backend/**/**",
     "postinstall": "npm run build"
   },
