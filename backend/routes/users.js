@@ -1,6 +1,16 @@
 var models = require('../models')
 var Boom = require('boom')
 var Joi = require('joi')
+var JWT = require('jsonwebtoken')
+
+var cookieOptions = {
+    ttl: 365 * 24 * 60 * 60 * 1000, // expires a year from today
+    encoding: 'none',    // we already used JWT to encode
+    isSecure: false,      // WARNING: SHOULD BE TRUE ON PRODUCTION!!!
+    isHttpOnly: true,    // prevent client alteration
+    clearInvalid: false, // remove invalid cookies
+    strictHeader: true   // don't allow violations of RFC 6265
+}
 
 module.exports = [{
     method: 'GET',
@@ -31,9 +41,11 @@ module.exports = [{
                 user.password = encrypted
                 models.User.create(user)
                 .then(user => {
-                    request.auth.session.set(user)
                     delete user.dataValues.password
+                    var token = JWT.sign(user.dataValues, 'supersecretpassword')
                     reply(user)
+                    .header("Authorization", token)
+                    .state("token", token, cookieOptions)
                 })
                 .catch(error => {
                     var response = Boom.badData('Validation failed')
@@ -64,9 +76,11 @@ module.exports = [{
             .then(user => {
                 user.verifyPassword(request.payload.password, (valid) => {
                     if (valid) {
-                        request.auth.session.set(user)
                         delete user.dataValues.password
-                        return reply(user)
+                        var token = JWT.sign(user.dataValues, 'supersecretpassword')
+                        reply(user)
+                        .header("Authorization", token)
+                        .state("token", token, cookieOptions)
                     } else {
                         return reply(Boom.unauthorized('Bad credentials'))
                     }

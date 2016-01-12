@@ -4,7 +4,7 @@ var Inert = require('inert')
 var Good = require('good')
 var models = require('./models')
 var routes = require('./routes')
-var authCookie = require('hapi-auth-cookie')
+var authJwt = require('hapi-auth-jwt2')
 var Promise = require('bluebird')
 var injectThen = require('inject-then')
 var Boom = require('boom')
@@ -27,7 +27,7 @@ var goodPlugin = {
 
 var plugins = [
     Inert,
-    authCookie,
+    authJwt,
     Vision,
     HapiSwagger
 ]
@@ -86,29 +86,25 @@ module.exports.createServer = function(connection) {
     ]).then(() => {
         routes.register(server)
 
-        server.auth.strategy('base', 'cookie', {
-            password: 'supersecretpassword', // cookie secret
-            cookie: 'app-cookie', // Cookie name
-            isHttpOnly: true,
-            path: '/api',
-            isSecure: false,
-            ttl: 24 * 60 * 60 * 1000, // Set session to 1 day
-            validateFunc: function(request, sessionUser, callback) {
+        server.auth.strategy('jwt', 'jwt', {
+            key: 'supersecretpassword',
+            validateFunc: function(decoded, request, callback) {
                 // If 'userId' param is present in the route, only allow
                 // access if it is equal to the logged in user. I.e. user can't
                 // access assets for other users.
-                if (sessionUser.scope !== 'admin' &&
+                if (decoded.scope !== 'admin' &&
                     request.params.userId !== undefined &&
-                    parseInt(sessionUser.id, 10) !== parseInt(request.params.userId, 10)) {
+                    parseInt(decoded.id, 10) !== parseInt(request.params.userId, 10)) {
                     callback('Unauthorized access', false)
                 } else {
                     callback(undefined, true)
                 }
-            }
+            },
+            verifyOptions: { algorithms: [ 'HS256' ] }
         })
 
         server.auth.default({
-            strategy: 'base',
+            strategy: 'jwt',
             scope: 'user'
         })
 
