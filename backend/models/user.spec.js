@@ -19,7 +19,7 @@ describe('user model', () => {
         })
         .then(user => {
             expect(user.dataValues.id).to.exist
-            done()
+            user.destroy().then(() => { done() })
         })
     })
 
