@@ -1,4 +1,5 @@
 import {requestFailed} from './actions'
+import cookie from 'react-cookie'
 
 export default store => next => action => {
     next(action)
@@ -28,6 +29,7 @@ export default store => next => action => {
     }
     options.headers.set('Content-Type', 'application/json')
     options.headers.set('Accept', 'application/json')
+    options.headers.set('X-CSRF-Token', cookie.load('crumb'))
 
     fetch(action.uri, options)
     .then(response => {

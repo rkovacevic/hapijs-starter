@@ -10,7 +10,7 @@ var injectThen = require('inject-then')
 var Boom = require('boom')
 var HapiSwagger = require('hapi-swagger')
 var Vision = require('vision')
-
+var Crumb = require('crumb')
 
 var goodPlugin = {
     register: Good,
@@ -25,11 +25,22 @@ var goodPlugin = {
     }
 }
 
+var crumbPlugin = {
+    register: Crumb,
+    options: {
+        restful: true,
+        skip: function() {
+            return process.env.NODE_ENV === 'test'
+        }
+    }
+}
+
 var plugins = [
     Inert,
     authJwt,
     Vision,
-    HapiSwagger
+    HapiSwagger,
+    crumbPlugin
 ]
 
 if (process.env.NODE_ENV !== 'test') {
